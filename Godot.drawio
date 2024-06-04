@@ -1,44 +1,53 @@
-<mxfile host="app.diagrams.net" modified="2024-06-02T21:34:42.077Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="lpNr46mSwJ4sk_DlkMxB" version="24.4.13" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-04T12:27:07.234Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="1ZCDJiX0qY2jpIrw_Xhz" version="24.4.13" type="github">
   <diagram name="Page-1" id="TE4aIfqvLEtsuWcpWw1F">
-    <mxGraphModel dx="1185" dy="632" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1430" dy="763" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-2" value="Scene" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="460" width="120" height="60" as="geometry" />
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-2" value="&lt;u&gt;Scene&lt;/u&gt;&lt;div&gt;Hold gui objects&lt;/div&gt;&lt;div&gt;Logic of ui&lt;/div&gt;&lt;div&gt;Listen to Update_Message&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="460" width="200" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-3" value="Model" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="330" width="120" height="60" as="geometry" />
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-3" value="&lt;u&gt;Model&lt;/u&gt;&lt;div&gt;Has data at runtime&lt;/div&gt;&lt;div&gt;Has method that call commands&lt;/div&gt;&lt;div&gt;No logic&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="260" y="330" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-4" value="Controller" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="550" y="460" width="120" height="60" as="geometry" />
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-4" value="&lt;u&gt;Controller&lt;/u&gt;&lt;div&gt;Static classes&lt;/div&gt;&lt;div&gt;Logic of game&lt;br&gt;&lt;div&gt;Has no own data&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="460" width="210" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-5" value="Resource" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="150" width="120" height="60" as="geometry" />
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-5" value="&lt;u&gt;Resource&lt;/u&gt;&lt;div&gt;In file system&lt;br&gt;&lt;/div&gt;&lt;div&gt;Has static data&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="260" y="180" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-3" target="6ICJXxfv5pJ-HmD5KhI3-5">
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-3" target="6ICJXxfv5pJ-HmD5KhI3-5" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="390" y="410" as="sourcePoint" />
             <mxPoint x="440" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-2" target="6ICJXxfv5pJ-HmD5KhI3-3">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="390" y="410" as="sourcePoint" />
-            <mxPoint x="440" y="360" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="100" y="360" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-4" target="6ICJXxfv5pJ-HmD5KhI3-3">
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-2" target="6ICJXxfv5pJ-HmD5KhI3-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="390" y="410" as="sourcePoint" />
             <mxPoint x="440" y="360" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="610" y="360" />
+              <mxPoint x="140" y="360" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="6ICJXxfv5pJ-HmD5KhI3-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="6ICJXxfv5pJ-HmD5KhI3-4" target="6ICJXxfv5pJ-HmD5KhI3-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="615" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ogUOMOBMNgfaVLUmQdY--1" value="&lt;u&gt;Message&lt;/u&gt;&lt;div&gt;Multiple static handlers&lt;/div&gt;&lt;div&gt;No return value&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="710" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ogUOMOBMNgfaVLUmQdY--2" value="&lt;u&gt;Request&lt;/u&gt;&lt;div&gt;One static handler&lt;br&gt;&lt;/div&gt;&lt;div&gt;Return value&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="790" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ogUOMOBMNgfaVLUmQdY--3" value="&lt;u&gt;Command&lt;/u&gt;&lt;div&gt;&lt;div&gt;One static handler&lt;/div&gt;&lt;/div&gt;&lt;div&gt;No return value&lt;/div&gt;&lt;div&gt;Call&amp;nbsp;Update_Message if root&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="870" width="280" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
