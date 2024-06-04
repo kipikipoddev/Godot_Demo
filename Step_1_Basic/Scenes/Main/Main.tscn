@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2l6g7lo8xull"]
+
+[ext_resource type="PackedScene" uid="uid://b5qo813bi084j" path="res://Scenes/Entity/Entity.tscn" id="1_lypol"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Entity_1" parent="." node_paths=PackedStringArray("Enemy") instance=ExtResource("1_lypol")]
+position = Vector2(111, 168)
+Enemy = NodePath("../Entity_2")
+
+[node name="Entity_2" parent="." node_paths=PackedStringArray("Enemy") instance=ExtResource("1_lypol")]
+position = Vector2(267, 163)
+Enemy = NodePath("../Entity_1")
