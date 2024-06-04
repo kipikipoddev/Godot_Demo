@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=4 format=3 uid="uid://bfqexxqyenyor"]
+
+[ext_resource type="Resource" uid="uid://buaa025vuqvge" path="res://Resources/Actions/Attacks/Medium_Attack.tres" id="1_xlred"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="2_ei8qg"]
+[ext_resource type="Resource" uid="uid://jxd1a7k680o5" path="res://Resources/Actions/Dots/Meduim_Dot.tres" id="3_omtd5"]
+
+[resource]
+script = ExtResource("2_ei8qg")
+Hp = 10
+Armor = 1
+Actions = Array[Object]([ExtResource("1_xlred"), ExtResource("3_omtd5")])

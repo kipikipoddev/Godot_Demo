@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Heal_Resource" load_steps=2 format=3 uid="uid://cbdj6mnfcku1r"]
+
+[ext_resource type="Script" path="res://Resources/Definitions/Heal_Resource.cs" id="1_5es4n"]
+
+[resource]
+script = ExtResource("1_5es4n")
+Heal = 4
+Cooldown = 6

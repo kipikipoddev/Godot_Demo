@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dot_Resource" load_steps=2 format=3 uid="uid://clqml8vqhoyh4"]
+
+[ext_resource type="Script" path="res://Resources/Definitions/Dot_Resource.cs" id="1_qif3e"]
+
+[resource]
+script = ExtResource("1_qif3e")
+Time_Between = 3
+Times = 3
+Damage = 1
+Cooldown = 3

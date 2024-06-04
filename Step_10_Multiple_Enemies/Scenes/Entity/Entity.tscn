@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5qo813bi084j"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Entity.cs" id="1_4e7o4"]
+[ext_resource type="Texture2D" uid="uid://bedqabt6k5ngk" path="res://icon.svg" id="1_c5s4f"]
+[ext_resource type="PackedScene" uid="uid://ddorpvmtc8f51" path="res://Scenes/Attacks_Scene/Attacks_Scene.tscn" id="3_wepto"]
+
+[node name="Entity" type="Node2D" node_paths=PackedStringArray("Enemies")]
+script = ExtResource("1_4e7o4")
+Enemies = []
+
+[node name="Name_Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 31.0
+offset_bottom = -57.0
+text = "XXX"
+horizontal_alignment = 1
+
+[node name="Hp_Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -56.0
+offset_right = 31.0
+offset_bottom = -33.0
+text = "XXX"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_c5s4f")
+
+[node name="Attacks" parent="." instance=ExtResource("3_wepto")]
+position = Vector2(0, 48)

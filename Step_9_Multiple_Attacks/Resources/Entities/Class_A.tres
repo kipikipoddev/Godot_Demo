@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=4 format=3 uid="uid://pbso8l6xu46m"]
+
+[ext_resource type="Resource" uid="uid://0nb564u6i5cs" path="res://Resources/Attacks/Small_Attack.tres" id="1_dfyny"]
+[ext_resource type="Resource" uid="uid://buaa025vuqvge" path="res://Resources/Attacks/Medium_Attack.tres" id="2_fwwks"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="2_ligl4"]
+
+[resource]
+script = ExtResource("2_ligl4")
+Hp = 5
+Attacks = Array[Object]([ExtResource("1_dfyny"), ExtResource("2_fwwks")])

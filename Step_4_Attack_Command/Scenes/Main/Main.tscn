@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2l6g7lo8xull"]
+
+[ext_resource type="PackedScene" uid="uid://b5qo813bi084j" path="res://Scenes/Entity/Entity.tscn" id="1_lypol"]
+[ext_resource type="Script" path="res://Scenes/Main/Main.cs" id="1_quepd"]
+[ext_resource type="Resource" uid="uid://pbso8l6xu46m" path="res://Resources/Entities/Class_A.tres" id="3_cupbu"]
+[ext_resource type="Resource" uid="uid://bfqexxqyenyor" path="res://Resources/Entities/Class_B.tres" id="4_i20rt"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_quepd")
+
+[node name="Entity_1" parent="." node_paths=PackedStringArray("Enemy") instance=ExtResource("1_lypol")]
+position = Vector2(111, 168)
+Resource = ExtResource("3_cupbu")
+Enemy = NodePath("../Entity_2")
+
+[node name="Entity_2" parent="." node_paths=PackedStringArray("Enemy") instance=ExtResource("1_lypol")]
+position = Vector2(252, 164)
+Resource = ExtResource("4_i20rt")
+Enemy = NodePath("../Entity_1")

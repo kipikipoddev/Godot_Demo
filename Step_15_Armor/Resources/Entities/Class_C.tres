@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=5 format=3 uid="uid://c4vd3vly8331t"]
+
+[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="1_ki4ok"]
+[ext_resource type="Resource" uid="uid://cw4l0ffalboi5" path="res://Resources/Actions/Heals/Small_Heal.tres" id="1_raxd6"]
+[ext_resource type="Resource" uid="uid://cbdj6mnfcku1r" path="res://Resources/Actions/Heals/Medium_Heal.tres" id="2_37ctf"]
+[ext_resource type="Resource" uid="uid://cu4qnpr6jjuw5" path="res://Resources/Actions/Hots/Small_Hot.tres" id="3_txa08"]
+
+[resource]
+script = ExtResource("1_ki4ok")
+Hp = 5
+Actions = Array[Object]([ExtResource("1_raxd6"), ExtResource("2_37ctf"), ExtResource("3_txa08")])
