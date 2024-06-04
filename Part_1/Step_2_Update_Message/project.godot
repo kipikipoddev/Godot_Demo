@@ -10,14 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Godot_Demo"
+config/name="Godot_Tutorial"
 run/main_scene="res://Scenes/Main/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="Godot_Demo"
+project/assembly_name="Godot_Tutorial"
 
 [rendering]
 
