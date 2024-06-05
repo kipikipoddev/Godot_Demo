@@ -9,7 +9,7 @@ public class Heal_Controller : Action_Controller
     {
         Heal_Command.Handler = Heal_Command_Handler;
         Can_Heal_Request.Handler = Can_Heal_Request_Handler;
-        Shield_Command.Handle(Shield_Command_Handler);
+        Shield_Command.Handler = Shield_Command_Handler;
     }
 
     private bool Can_Heal_Request_Handler(Can_Heal_Request request)
@@ -28,6 +28,5 @@ public class Heal_Controller : Action_Controller
         command.Model.Cooldown.Start();
         command.Target.Shield.Max = command.Model.Amount;
         command.Target.Shield.Value = command.Model.Amount;
-        new Update_Message();
     }
 }
