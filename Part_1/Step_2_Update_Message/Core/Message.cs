@@ -11,8 +11,8 @@ public abstract record Message<TMessage>
     public Message()
     {
         var e = this as TMessage;
-        foreach (var listener in handlers.ToArray())
-            listener(e);
+        foreach (var handler in handlers.ToArray())
+            handler(e);
     }
 
     public static void Handle(Action<TMessage> handler)

@@ -10,14 +10,14 @@ public partial class Entity : Base_Scene<Entity_Model>
     [Export]
     public Entity Enemy;
 
-    private Label hp_lable;
+    private Label hp_label;
     private Button attack_button;
 
 
     public override void _Ready()
     {
         GetNode<Label>("Name_Label").Text = Resource.Name;
-        hp_lable = GetNode<Label>("Hp_Label");
+        hp_label = GetNode<Label>("Hp_Label");
         attack_button = GetNode<Button>("Attack_Button");
         attack_button.Text = Resource.Attack.Name;
         Model = new Entity_Model(Resource);
@@ -25,7 +25,7 @@ public partial class Entity : Base_Scene<Entity_Model>
 
     public override void Update()
     {
-        hp_lable.Text = Get_Hp();
+        hp_label.Text = Get_Hp();
         attack_button.Disabled = !Model.Attack_Model.Can_Attack(Enemy.Model);
     }
 
