@@ -23,6 +23,7 @@ window/size/window_width_override=2304
 window/size/window_height_override=1226
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
+
 [dotnet]
 
 project/assembly_name="Godot_Tutorial"
