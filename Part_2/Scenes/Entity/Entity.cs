@@ -2,7 +2,7 @@ using System.Linq;
 using Components_Namespace;
 using Core;
 using Godot;
-using Messages;
+using Requests;
 using Resources;
 
 public partial class Entity : Base_Scene<Components>
@@ -20,11 +20,11 @@ public partial class Entity : Base_Scene<Components>
     {
         hp_lable = GetNode<Label>("Hp_Label");
         shield_label = GetNode<Label>("Shield_Label");
-        Model = new Create_Entity_Model_Request(Resource).Result;
+        Model = new Create_Entity_Request(Resource).Result;
         GetNode<Label>("Name_Label").Text = Get_Name();
         var actions = GetNode<Actions_Scene>("Actions");
         actions.Targets = Targets.ToList();
-        actions.Model = Model.Get_All<Action_Component>().ToArray();
+        actions.Model = Model.Get_All<Action_Components>().ToArray();
     }
 
     public override void Update()
@@ -32,7 +32,7 @@ public partial class Entity : Base_Scene<Components>
         var hp = Model.Hp();
         hp_lable.Text = hp.Is_Min ? "Dead" : hp.ToString();
 
-        var shield = Model.Get_Or_Defualt<Shield_Component>()?.Shield;
+        var shield = Model.Shield();
         shield_label.Visible = shield != null;
         if (shield != null)
             shield_label.Text = shield.ToString();

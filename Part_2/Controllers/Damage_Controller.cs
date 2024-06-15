@@ -18,12 +18,12 @@ public class Damage_Controller
         damage = Get_After_Shield(command, damage);
         if (damage > 0)
             damage = Get_After_Armor(command, damage);
-        command.Entity.Get_Hp().Value -= damage;
+        command.Entity.Hp().Value -= damage;
     }
 
     private static int Get_After_Shield(Damage_Command command, int damage)
     {
-        var shield = command.Entity.Get_Shield();
+        var shield = command.Entity.Shield();
         if (shield == null)
             return damage;
 
@@ -34,7 +34,7 @@ public class Damage_Controller
         }
         else
         {
-            command.Entity.Remove_Shield();
+            command.Entity.Remove<Shield_Component>();
             return damage - shield.Value;
         }
     }

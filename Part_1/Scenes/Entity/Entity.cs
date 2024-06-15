@@ -1,7 +1,6 @@
-using System.Linq;
 using Components_Namespace;
-using Core;
 using Godot;
+using Requests;
 using Resources;
 
 public partial class Entity : Base_Scene
@@ -14,7 +13,7 @@ public partial class Entity : Base_Scene
 
     private Label hp_label;
     private Button attack_button;
-    private Components attack_model;
+    private Attack_Component attack_model;
 
     public override void _Ready()
     {
@@ -23,22 +22,22 @@ public partial class Entity : Base_Scene
         attack_button = GetNode<Button>("Attack_Button");
         attack_button.Text = Resource.Attack.Name;
         Model = new Create_Entity_Request(Resource).Result;
-        attack_model = Model.Get_Actions().First();
+        attack_model = Model.Get<Attack_Component>();
     }
 
     public override void Update()
     {
         Set_Hp();
-        attack_button.Disabled = !attack_model.Get_Can_Action()(Enemy.Model);
+        attack_button.Disabled = !attack_model.Can(Enemy.Model);
     }
 
     private void Set_Hp()
     {
-        hp_label.Text = Model.Get_Hp().Is_Min ? "Dead" : Model.Get_Hp().ToString();
+        hp_label.Text = Model.Hp().Is_Min ? "Dead" : Model.Hp().ToString();
     }
 
     public void On_button_pressed()
     {
-        attack_model.Get_Do_Action()(Enemy.Model);
+        attack_model.Do(Enemy.Model);
     }
 }

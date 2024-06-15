@@ -1,54 +1,67 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Core;
 
-public record Components
+public record Components : Component
 {
-    private readonly Dictionary<string, List<object>> components = new();
+    private readonly Dictionary<Type, List<Component>> components = new();
 
-    public Components Parent { get; set; }
-
-    public Components Add(string key, object component)
+    public Components Set(Component component)
     {
-        if (!components.ContainsKey(key))
-            components[key] = new();
-        components[key].Add(component);
+        component.Parent = this;
+        foreach (var type in Get_Types(component.GetType()))
+            components[type] = new() { component };
         return this;
     }
 
-    public Components Set(string key, object component)
+    public Components Add(Component component)
     {
-        components[key] = new() { component };
+        component.Parent = this;
+        foreach (var type in Get_Types(component.GetType()))
+        {
+            if (!components.ContainsKey(type))
+                components[type] = new();
+            components[type].Add(component);
+        }
         return this;
     }
 
-    public Components Add_Range(string key, IEnumerable<object> components)
+    public Components Add_Range(IEnumerable<Component> components)
     {
         foreach (var component in components)
-            Add(key, component);
+            Add(component);
         return this;
     }
 
-    public Components Clear(string key)
+    public T Get<T>()
+        where T : Component
     {
-        if (components.ContainsKey(key))
-            components.Remove(key);
-        return this;
-    }
-
-    public bool Has(string key) => components.ContainsKey(key) && components[key].Any();
-
-
-    public T Get<T>(string key)
-    {
-        return components.ContainsKey(key)
-            ? (T)components[key].FirstOrDefault()
+        return Has<T>()
+            ? (T)components[typeof(T)].FirstOrDefault()
             : default;
     }
 
-    public IEnumerable<T> Get_All<T>(string key)
+    public IEnumerable<T> Get_All<T>()
+        where T : Component
     {
-        return components[key].Select(c => (T)c);
+        return components[typeof(T)].Select(c => (T)c);
+    }
+
+    public void Remove<T>()
+    {
+        if (Has<T>())
+            components.Remove(typeof(T));
+    }
+
+    public bool Has<T>() => components.ContainsKey(typeof(T));
+
+    private IEnumerable<Type> Get_Types(Type type)
+    {
+        yield return type;
+        if (type.BaseType != typeof(object))
+            foreach (var t in Get_Types(type.BaseType))
+                yield return t;
     }
 }

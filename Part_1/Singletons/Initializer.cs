@@ -7,7 +7,7 @@ public partial class Initializer : Node
 {
     public Initializer()
     {
-        new Attack_Controller();
+        new Actions_Controller();
         new Create_Entity_Controller();
     }
 }

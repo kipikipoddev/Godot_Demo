@@ -1,54 +1,24 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Core;
 
-public record Components
+public record Components : Component
 {
-    private readonly Dictionary<string, List<object>> components = new();
+    private readonly Dictionary<Type, Component> components = new();
 
-    public Components Parent { get; set; }
-
-    public Components Add(string key, object component)
+    public Components Set(Component component)
     {
-        if (!components.ContainsKey(key))
-            components[key] = new();
-        components[key].Add(component);
+        component.Parent = this;
+        components[component.GetType()] = component;
         return this;
     }
 
-    public Components Set(string key, object component)
+    public T Get<T>()
+        where T : Component
     {
-        components[key] = new() { component };
-        return this;
-    }
-
-    public Components Add_Range(string key, IEnumerable<object> components)
-    {
-        foreach (var component in components)
-            Add(key, component);
-        return this;
-    }
-
-    public Components Clear(string key)
-    {
-        if (components.ContainsKey(key))
-            components.Remove(key);
-        return this;
-    }
-
-    public bool Has(string key) => components.ContainsKey(key) && components[key].Any();
-
-
-    public T Get<T>(string key)
-    {
-        return components.ContainsKey(key)
-            ? (T)components[key].FirstOrDefault()
+        return components.ContainsKey(typeof(T))
+            ? (T)components[typeof(T)]
             : default;
-    }
-
-    public IEnumerable<T> Get_All<T>(string key)
-    {
-        return components[key].Select(c => (T)c);
     }
 }

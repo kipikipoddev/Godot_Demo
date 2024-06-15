@@ -10,10 +10,9 @@ public static class Mediator
 
     public static void Send(Message message)
     {
-        var types = Get_Types(message.GetType());
-        foreach (var type in types)
-            if (listeners.ContainsKey(type))
-                listeners[type].ForEach(l => l(message));
+        var type = message.GetType();
+        if (listeners.ContainsKey(type))
+            listeners[type].ForEach(l => l(message));
     }
 
     public static V Send<V>(Request<V> request)
@@ -33,13 +32,5 @@ public static class Mediator
         where T : Request<V>
     {
         handlers[typeof(T)] = o => handler((T)o);
-    }
-
-    private static IEnumerable<Type> Get_Types(Type type)
-    {
-        yield return type;
-        if (type.BaseType != typeof(object))
-            foreach (var base_type in Get_Types(type.BaseType))
-                yield return base_type;
     }
 }

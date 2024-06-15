@@ -5,7 +5,7 @@ namespace Core;
 
 public abstract record Message
 {
-    protected static int Indentation = 0;
+    protected static int Indentation { get; private set; }
 
     public Message()
     {

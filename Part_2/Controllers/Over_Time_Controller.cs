@@ -9,69 +9,64 @@ namespace Controllers;
 
 public class Over_Time_Controller
 {
-    private readonly Dictionary<Ranged_Value<double>, Over_Time_Command> timers_to_models;
+    private readonly List<Effect_Component> effects;
 
     public Over_Time_Controller()
     {
-        timers_to_models = new();
+        effects = new();
         Mediator.Add_Listener<Over_Time_Command>(Over_Time_Command_Handler);
         Mediator.Add_Listener<Update_Message>(Update_Message_Handler);
     }
 
     private void Over_Time_Command_Handler(Over_Time_Command command)
     {
-        var timer = Get_Or_Create(command);
-        new Start_Timer_Command(timer);
-        timers_to_models[timer] = command;
-        Do(timer, command);
+        var effect = Get_Or_Create(command);
+        effect.Timer().Start();
+        Do(effect);
     }
 
     private void Update_Message_Handler(Update_Message message)
     {
-        foreach (var timer in timers_to_models.Keys)
-            if (timer.Is_Min)
-                Do(timer, timers_to_models[timer]);
+        foreach (var effect in effects)
+            if (effect.Timer().Ended)
+                Do(effect);
     }
 
-    private void Do(Ranged_Value<double> timer, Over_Time_Command cmd)
+    private void Do(Effect_Component effect)
     {
-        if (!Can_Do(cmd))
-            timers_to_models.Remove(timer);
+        if (!Can_Do(effect))
+            effects.Remove(effect);
         else
         {
-            var times = cmd.Model.Get_Over_Time().Times;
-            if (cmd.Activated++ < times - 1)
-                new Start_Timer_Command(timer);
+            effect.Left--;
+            if (effect.Left > 0)
+                effect.Timer().Start();
             else
-                timers_to_models.Remove(timer);
-            Do(cmd);
+                effects.Remove(effect);
+            effect.Action.Do(effect.Parent);
         }
     }
 
-    private Ranged_Value<double> Get_Or_Create(Over_Time_Command command)
+    private Effect_Component Get_Or_Create(Over_Time_Command command)
     {
-        var existing = timers_to_models.FirstOrDefault(kv => command.Equals(kv.Value));
-        if (existing.Key != null)
-            return existing.Key;
+        var existing = effects.FirstOrDefault(e => Equals(command, e));
+        if (existing != null)
+            return existing;
         else
         {
-            var time = command.Model.Get_Over_Time().Time_between;
-            command.Model.Set_Timer(time);
-            return command.Model.Get_Timer();
+            var effect = new Effect_Component(command.Action);
+            command.Target.Add(effect);
+            return effect;
         }
     }
 
-    private void Do(Over_Time_Command cmd)
+    private static bool Equals(Over_Time_Command command, Effect_Component e)
     {
-        var is_heal = cmd.Model.Get_Over_Time().Is_heal;
-        if (is_heal)
-            cmd.Target.Get_Hp().Value += cmd.Model.Get_Amount();
-        else
-            new Damage_Command(cmd.Target, cmd.Model.Get_Amount());
+        return e.Action.Name().Equals(command.Action.Name());
     }
 
-    private static bool Can_Do(Over_Time_Command cmd)
+    private static bool Can_Do(Effect_Component comp)
     {
-        return cmd.Target.Get_Hp().Not_Min;
+        return comp.Parent.Hp().Not_Min;
     }
 }

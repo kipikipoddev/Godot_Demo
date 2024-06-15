@@ -18,9 +18,10 @@ public class Timer_Controller
 
     private void Start_Timer_Command_Handler(Start_Timer_Command cmd)
     {
-        cmd.Timer.Value = cmd.Timer.Max;
-        if (!timers.Contains(cmd.Timer))
-            timers.Add(cmd.Timer);
+        var time = cmd.Timer.Time;
+        time.Value = time.Max;
+        if (!timers.Contains(time))
+            timers.Add(time);
     }
 
     private void Time_Message_Handler(Time_Message msg)
