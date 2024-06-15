@@ -1,36 +1,37 @@
 using System.Collections.Generic;
 using Commands;
-using Components_Namespace;
+using Core;
 using Messages;
 
 namespace Controllers;
 
 public class Timer_Controller
 {
-    private readonly List<Timer_Component> timers;
+    private readonly List<Ranged_Value<double>> timers;
 
     public Timer_Controller()
     {
         timers = new();
-        Start_Timer_Command.Handler = Start_Timer_Command_Handler;
-        Time_Message.Handle(Time_Message_Handler);
+        Mediator.Add_Listener<Start_Timer_Command>(Start_Timer_Command_Handler);
+        Mediator.Add_Listener<Time_Message>(Time_Message_Handler);
     }
 
     private void Start_Timer_Command_Handler(Start_Timer_Command cmd)
     {
-        if (!timers.Contains(cmd.Component))
-            timers.Add(cmd.Component);
+        cmd.Timer.Value = cmd.Timer.Max;
+        if (!timers.Contains(cmd.Timer))
+            timers.Add(cmd.Timer);
     }
 
     private void Time_Message_Handler(Time_Message msg)
     {
         for (int i = 0; i < timers.Count; i++)
         {
-            timers[i].Time.Value -= msg.Delta;
-            if (timers[i].Ended)
+            timers[i].Value -= msg.Delta;
+            if (timers[i].Is_Min)
             {
                 new Update_Message();
-                if (timers[i].Ended)
+                if (timers[i].Is_Min)
                 {
                     timers.RemoveAt(i);
                     i--;

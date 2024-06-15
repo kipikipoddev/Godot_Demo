@@ -2,7 +2,6 @@ using System.Linq;
 using Components_Namespace;
 using Core;
 using Godot;
-using Messages;
 using Resources;
 
 public partial class Entity : Base_Scene

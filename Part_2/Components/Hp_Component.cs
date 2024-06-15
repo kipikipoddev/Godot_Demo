@@ -2,20 +2,18 @@ using Core;
 
 namespace Components_Namespace;
 
-public record Hp_Component : Component
+public static class Hp_Component
 {
-    public Ranged_Value<int> Hp { get; set; }
+    private static readonly string Key = "Hp_Component";
 
-    public Hp_Component(int hp)
+    public static Components Set_Hp(this Components comp, int hp)
     {
-        Hp = new(hp, 0, hp);
+        comp.Set(Key, new Ranged_Value<int>(hp, 0, hp));
+        return comp;
     }
-}
 
-public static class Components_Hp_Extension
-{
-    public static Ranged_Value<int> Hp(this Components components)
+    public static Ranged_Value<int> Get_Hp(this Components comp)
     {
-        return components.Get_Or_Defualt<Hp_Component>()?.Hp;
+        return comp.Get<Ranged_Value<int>>(Key);
     }
 }

@@ -2,15 +2,18 @@ using Core;
 
 namespace Components_Namespace;
 
-public record Armor_Component(int Armor) : Component
+public static class Armor_Component
 {
-}
+    private static readonly string Key = "Armor_Component";
 
-public static class Components_Armor_Extension
-{
-    public static int Armor(this Components components)
+    public static Components Set_Armor(this Components comp, int armor)
     {
-        return components.Get_Or_Defualt<Armor_Component>()?.Armor ?? 0;
+        comp.Set(Key, armor);
+        return comp;
+    }
+
+    public static int Get_Armor(this Components comp)
+    {
+        return comp.Get<int>(Key);
     }
 }
-

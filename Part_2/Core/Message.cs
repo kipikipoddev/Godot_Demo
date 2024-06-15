@@ -1,31 +1,42 @@
 using System;
-using System.Collections.Generic;
+using System.Text;
 
 namespace Core;
 
-public abstract record Message<TMessage> : Base
-    where TMessage : class
+public abstract record Message
 {
-    private static readonly List<Action<TMessage>> handlers = new();
+    protected static int Indentation = 0;
 
     public Message()
     {
-        Started();
-        var m = this as TMessage;
-        foreach (var listener in handlers.ToArray())
-            listener(m);
-        Ended();
+        Start();
+        Send();
+        End();
     }
 
-    public static void Handle(Action<TMessage> handler)
+    protected virtual void Send()
     {
-        if (!handlers.Contains(handler))
-            handlers.Add(handler);
+        Mediator.Send(this);
     }
 
-    public static void Unhandle(Action<TMessage> handler)
+    protected virtual void Start()
     {
-        if (handlers.Contains(handler))
-            handlers.Remove(handler);
+        Write_log("Started");
+        Indentation++;
+    }
+
+    protected virtual void End()
+    {
+        Indentation--;
+        Write_log("Ended");
+    }
+
+    protected void Write_log(string message)
+    {
+        var sb = new StringBuilder();
+        sb.Append(DateTime.Now.ToString("HH:mm:ss:ff"));
+        for (int i = 0; i < Indentation; i++)
+            sb.Append('\t');
+        Console.WriteLine($"{sb} {GetType().Name} {message}");
     }
 }

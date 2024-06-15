@@ -1,3 +1,4 @@
+using Core;
 using Godot;
 using Messages;
 
@@ -16,7 +17,7 @@ public partial class Base_Scene<T> : Node2D
 
     public Base_Scene()
     {
-        Update_Message.Handle((m) => Update());
+        Mediator.Add_Listener<Update_Message>((m) => Update());
     }
 
     public virtual void Update() { }

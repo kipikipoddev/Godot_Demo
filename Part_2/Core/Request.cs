@@ -1,18 +1,11 @@
-using System;
-
 namespace Core;
 
-public abstract record Request<TRequest, TResult> : Base
-    where TRequest : class
+public abstract record Request<T> : Message
 {
-    public static Func<TRequest, TResult> Handler;
+    public T Result { get; protected set; }
 
-    public TResult Result { get; }
-
-    public Request()
+    protected override void Send()
     {
-        Started();
-        Result = Handler(this as TRequest);
-        Ended();
+        Result = Mediator.Send(this);
     }
 }

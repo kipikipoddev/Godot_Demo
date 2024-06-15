@@ -1,19 +1,13 @@
-using System;
 using Messages;
 
 namespace Core;
 
-public abstract record Command<TCommand> : Base
-    where TCommand : class
+public abstract record Command : Message
 {
-    public static Action<TCommand> Handler;
-
-    public Command(bool update_message = true)
+    protected override void End()
     {
-        Started();
-        Handler(this as TCommand);
-        if (Indentation == 1 & update_message)
+        if (Indentation == 1)
             new Update_Message();
-        Ended();
+        base.End();
     }
 }

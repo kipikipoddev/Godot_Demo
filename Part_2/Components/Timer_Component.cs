@@ -3,28 +3,24 @@ using Core;
 
 namespace Components_Namespace;
 
-public record Timer_Component : Component
+public static class Timer_Component
 {
-    public Ranged_Value<double> Time { get; }
-    public bool In_Progress => Time.Value > 0;
-    public bool Ended => Time.Value <= 0;
+    private static readonly string Key = "Timer_Component";
 
-    public Timer_Component(int time)
+    public static Components Set_Timer(this Components comp, int time)
     {
-        Time = new(0, 0, time);
+        comp.Set(Key, new Ranged_Value<double>(0, 0, time));
+        return comp;
     }
 
-    public void Start()
+    public static Ranged_Value<double> Get_Timer(this Components comp)
     {
-        Time.Value = Time.Max;
-        new Start_Timer_Command(this);
+        return comp.Get<Ranged_Value<double>>(Key);
     }
-}
 
-public static class Components_Timer_Extension
-{
-    public static Timer_Component Timer(this Components components)
+    public static void Start_Timer(this Components comp)
     {
-        return components.Get<Timer_Component>();
+        var timer = comp.Get<Ranged_Value<double>>(Key);
+        new Start_Timer_Command(timer);
     }
 }

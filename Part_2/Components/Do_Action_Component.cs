@@ -3,14 +3,18 @@ using Core;
 
 namespace Components_Namespace;
 
-public record Do_Action_Component(Action<Components> Action) : Component
+public static class Do_Action_Component
 {
-}
+    private static readonly string Key = "Do_Action_Component";
 
-public static class Components_Do_Action_Extension
-{
-    public static void Action(this Components components,Components arg)
+    public static Components Set_Do_Action(this Components comp, Action<Components> action)
     {
-        components.Get<Do_Action_Component>().Action(arg);
+        comp.Set(Key, action);
+        return comp;
+    }
+
+    public static Action<Components> Get_Do_Action(this Components comp)
+    {
+        return comp.Get<Action<Components>>(Key);
     }
 }

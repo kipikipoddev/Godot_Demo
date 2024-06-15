@@ -1,15 +1,20 @@
 using Core;
+using Data;
 
 namespace Components_Namespace;
 
-public record Over_Time_Component(int Time_between, int Times, bool Is_heal) : Component
+public static class Over_Time_Component
 {
-}
+    private static readonly string Key = "Over_Time_Component";
 
-public static class Components_Over_Time_Extension
-{
-    public static Over_Time_Component Over_Time(this Components components)
+    public static Components Set_Over_Time(this Components comp, Over_Time_Data model)
     {
-        return components.Get<Over_Time_Component>();
+        comp.Set(Key, model);
+        return comp;
+    }
+
+    public static Over_Time_Data Get_Over_Time(this Components comp)
+    {
+        return comp.Get<Over_Time_Data>(Key);
     }
 }
