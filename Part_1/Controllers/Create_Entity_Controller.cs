@@ -3,7 +3,6 @@ using Components_Namespace;
 using Core;
 using Messages;
 using Resources;
-using Singletons;
 
 namespace Controllers;
 
@@ -17,15 +16,21 @@ public class Create_Entity_Controller
     private Components Create_Entity_Model_Request_Handler(Create_Entity_Request request)
     {
         var entity = new Components()
-            .Set(new Name_Component(request.Resource.Name))
-            .Set(new Hp_Component(request.Resource.Hp));
-
-        entity.Set(Create_Attack_Component(request.Resource.Attack));
+             .Set_Name(request.Resource.Name)
+             .Set_Hp(request.Resource.Hp);
+        entity.Add_Action(Get_Attack_Component(request.Resource.Attack, entity));
         return entity;
     }
 
-    private Attack_Component Create_Attack_Component(Attack_Resource resource)
+    private Components Get_Attack_Component(Attack_Resource resource, Components entity)
     {
-        return new Attack_Component(resource.Name, resource.Damage);
+        var attack_action = new Components()
+            .Set_Name(resource.Name)
+            .Set_Amount(resource.Damage);
+        attack_action.Parent = entity;
+        attack_action
+            .Set_Can_Action(c => new Can_Attack_Request(attack_action, c).Result)
+            .Set_Do_Action(c => new Attack_Command(attack_action, c));
+        return attack_action;
     }
 }

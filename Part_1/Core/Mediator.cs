@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Core;
 
-namespace Singletons;
+namespace Core;
 
 public static class Mediator
 {
     private static readonly Dictionary<Type, List<Action<object>>> listeners = new();
     private static readonly Dictionary<Type, Func<object, object>> handlers = new();
 
-    public static void Call(Message message)
+    public static void Send(Message message)
     {
         var types = Get_Types(message.GetType());
         foreach (var type in types)
@@ -17,7 +16,7 @@ public static class Mediator
                 listeners[type].ForEach(l => l(message));
     }
 
-    public static V Call<V>(Request<V> request)
+    public static V Send<V>(Request<V> request)
     {
         return (V)handlers[request.GetType()](request);
     }

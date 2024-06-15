@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using Singletons;
 
 namespace Core;
 
@@ -11,13 +10,13 @@ public abstract record Message
     public Message()
     {
         Start();
-        Call();
+        Send();
         End();
     }
 
-    protected virtual void Call()
+    protected virtual void Send()
     {
-        Mediator.Call(this);
+        Mediator.Send(this);
     }
 
     protected virtual void Start()

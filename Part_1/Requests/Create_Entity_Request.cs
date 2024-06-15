@@ -3,6 +3,7 @@ using Resources;
 
 namespace Messages;
 
-public record Create_Entity_Request(Entity_Resource Resource) : Request<Components>
+public record Create_Entity_Request(Entity_Resource Resource)
+    : Request<Components>
 {
 }
