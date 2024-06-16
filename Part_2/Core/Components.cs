@@ -8,6 +8,11 @@ public record Components : Component
 {
     private readonly Dictionary<Type, List<Component>> components = new();
 
+    public Components(params Component[] components)
+    {
+        Add_Range(components);
+    }
+
     public Components Set(Component component)
     {
         component.Parent = this;
@@ -30,8 +35,9 @@ public record Components : Component
 
     public Components Add_Range(IEnumerable<Component> components)
     {
-        foreach (var component in components)
-            Add(component);
+        if (components != null)
+            foreach (var component in components)
+                Add(component);
         return this;
     }
 

@@ -14,21 +14,22 @@ public class Hp_Change_Controller
 
     private void Damage_Command_Handler(Hp_Change_Command command)
     {
+        var hp = command.Target.Hp().Hp;
         var amount = command.Amount;
         if (command.Is_Positive)
-            command.Entity.Hp().Value += amount;
+            hp.Value += amount;
         else
         {
             amount = Get_After_Shield(command, amount);
             if (amount > 0)
                 amount = Get_After_Armor(command, amount);
-            command.Entity.Hp().Value -= amount;
+            hp.Value -= amount;
         }
     }
 
     private static int Get_After_Shield(Hp_Change_Command command, int damage)
     {
-        var shield = command.Entity.Shield();
+        var shield = command.Target.Shield();
         if (shield == null)
             return damage;
 
@@ -39,13 +40,13 @@ public class Hp_Change_Controller
         }
         else
         {
-            command.Entity.Remove<Shield_Component>();
+            command.Target.Remove<Shield_Component>();
             return damage - shield.Value;
         }
     }
 
     private static int Get_After_Armor(Hp_Change_Command command, int damage)
     {
-        return Math.Max(1, damage - command.Entity.Armor());
+        return Math.Max(1, damage - command.Target.Armor());
     }
 }

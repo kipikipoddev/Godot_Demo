@@ -23,21 +23,35 @@ public class Create_Entity_Controller
             .Add_Range(resource.Actions.Select(Create_Action));
     }
 
-    private Action_Components Create_Action(Action_Resource resource)
+    private Components Create_Action(Action_Resource resource)
     {
-        Action_Components action = null;
+        var action = new Components()
+            .Set(new Name_Component(resource.Name))
+            .Set(new Timer_Component(resource.Cooldown));
+
         if (resource is Attack_Resource attack)
-            action = new Attack_Action_Components(attack);
+        {
+            action.Set(new Hp_Change_Action_Component())
+                .Set(new Amount_Component(attack.Damage))
+                .Set(new Is_Positive_Component(false));
+        }
         else if (resource is Heal_Resource heal)
-            action = new Heal_Action_Components(heal);
+        {
+            action.Set(new Hp_Change_Action_Component())
+                .Set(new Amount_Component(heal.Heal))
+                .Set(new Is_Positive_Component(true));
+        }
         else if (resource is Shield_Resource shield)
-            action = new Shield_Action_Components(shield);
+        {
+            action.Set(new Shield_Action_Component())
+                .Set(new Amount_Component(shield.Amount));
+        }
 
         if (resource is Hot_Resource hot)
             action.Set(new Over_Time_Component(hot.Time_Between, hot.Times));
         if (resource is Dot_Resource dot)
             action.Set(new Over_Time_Component(dot.Time_Between, dot.Times));
-            
+
         return action;
     }
 }

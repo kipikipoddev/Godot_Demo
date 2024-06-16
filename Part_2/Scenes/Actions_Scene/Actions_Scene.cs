@@ -4,7 +4,7 @@ using Components_Namespace;
 using Core;
 using Godot;
 
-public partial class Actions_Scene : Base_Scene<Action_Components[]>
+public partial class Actions_Scene : Base_Scene<Action_Component[]>
 {
     public List<Entity> Targets;
 
@@ -14,7 +14,7 @@ public partial class Actions_Scene : Base_Scene<Action_Components[]>
 
     public override void Update()
     {
-        if (Target?.Hp().Is_Min ?? false)
+        if (!Target?.Hp().Is_Alive ?? false)
             Targets.RemoveAt(0);
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].Disabled = !Model[i].Can(Target);
@@ -34,7 +34,7 @@ public partial class Actions_Scene : Base_Scene<Action_Components[]>
     private Button Get_Button(int index)
     {
         var button = new Button();
-        button.Text = Model[index].Get<Name_Component>().Name;
+        button.Text = Model[index].Parent.Name();
         button.Pressed += () => Model[index].Do(Target);
         return button;
     }

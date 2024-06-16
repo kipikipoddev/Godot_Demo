@@ -15,8 +15,8 @@ public record Hp_Component : Component
 
 public static class Hp_Extensions
 {
-    public static Ranged_Value<int> Hp(this Components components)
+    public static Hp_Component Hp(this Components components)
     {
-        return components.Get<Hp_Component>().Hp;
+        return components.Get<Hp_Component>();
     }
 }

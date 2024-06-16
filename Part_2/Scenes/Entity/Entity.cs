@@ -24,13 +24,13 @@ public partial class Entity : Base_Scene<Components>
         GetNode<Label>("Name_Label").Text = Get_Name();
         var actions = GetNode<Actions_Scene>("Actions");
         actions.Targets = Targets.ToList();
-        actions.Model = Model.Get_All<Action_Components>().ToArray();
+        actions.Model = Model.Get_Actions().ToArray();
     }
 
     public override void Update()
     {
         var hp = Model.Hp();
-        hp_lable.Text = hp.Is_Min ? "Dead" : hp.ToString();
+        hp_lable.Text = hp.Is_Alive ? hp.Hp.ToString() : "Dead";
 
         var shield = Model.Shield();
         shield_label.Visible = shield != null;

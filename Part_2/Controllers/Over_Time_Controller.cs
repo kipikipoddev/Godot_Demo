@@ -9,7 +9,7 @@ namespace Controllers;
 
 public class Over_Time_Controller
 {
-    private readonly List<Effect_Component> effects;
+    private readonly List<Components> effects;
 
     public Over_Time_Controller()
     {
@@ -30,18 +30,18 @@ public class Over_Time_Controller
                 Do(effects[i]);
     }
 
-    private void Do(Effect_Component effect)
+    private void Do(Components components)
     {
-        if (!Can_Do(effect))
-            effects.Remove(effect);
+        if (!Can_Do(components))
+            effects.Remove(components);
         else
         {
-            effect.Left--;
-            if (effect.Left > 0)
-                effect.Timer().Start();
+            var effect = components.Effect();
+            if (++effect.Happend < effect.Times)
+                components.Timer().Start();
             else
-                effects.Remove(effect);
-            effect.Command.Invoke();
+                effects.Remove(components);
+            effect.Action.Invoke();
         }
     }
 
@@ -49,22 +49,35 @@ public class Over_Time_Controller
     {
         var existing = effects.FirstOrDefault(e => Equals(command, e));
         if (existing != null)
+        {
             existing.Timer().Start();
+            existing.Effect().Happend = 0;
+        }
         else
         {
-            var effect = new Effect_Component(command.Action, command.Command);
-            effects.Add(effect);
-            command.Target.Add(effect);
+            var components = Get_Components(command);
+            effects.Add(components);
+            command.Target.Add(components);
         }
     }
 
-    private static bool Equals(Over_Time_Command command, Effect_Component e)
+    private static Components Get_Components(Over_Time_Command command)
     {
-        return e.Name().Equals(command.Action.Name());
+        var over_time = command.Action.Over_Time();
+        return new Components()
+              .Set(command.Action.Get<Name_Component>())
+              .Set(new Effect_Component(command.Command, over_time.Times - 1))
+              .Set(new Timer_Component(over_time.Time_between));
     }
 
-    private static bool Can_Do(Effect_Component comp)
+
+    private static bool Equals(Over_Time_Command command, Components components)
     {
-        return comp.Parent.Hp().Not_Min;
+        return components.Name().Equals(command.Action.Name());
+    }
+
+    private static bool Can_Do(Components comp)
+    {
+        return comp.Parent.Hp().Is_Alive;
     }
 }

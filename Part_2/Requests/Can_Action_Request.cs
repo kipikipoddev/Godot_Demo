@@ -1,9 +1,9 @@
+using Components_Namespace;
 using Core;
-using Interfaces;
 
 namespace Requests;
 
-public record Can_Action_Request(IAction_Model Action, IHp_Model Target)
+public record Can_Action_Request(Components Action, Components Target)
     : Request<bool>
 {
 }
