@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Entity_Resource" load_steps=2 format=3 uid="uid://bfqexxqyenyor"]
-
-[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="1_q4rwp"]
-
-[resource]
-script = ExtResource("1_q4rwp")
-Hp = 7
-Damage = 3

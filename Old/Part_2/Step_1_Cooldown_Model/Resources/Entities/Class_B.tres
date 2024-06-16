@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Entity_Resource" load_steps=3 format=3 uid="uid://bfqexxqyenyor"]
-
-[ext_resource type="Resource" uid="uid://buaa025vuqvge" path="res://Resources/Attacks/Big_Attack.tres" id="1_xlred"]
-[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="2_ei8qg"]
-
-[resource]
-script = ExtResource("2_ei8qg")
-Hp = 7
-Attack = ExtResource("1_xlred")

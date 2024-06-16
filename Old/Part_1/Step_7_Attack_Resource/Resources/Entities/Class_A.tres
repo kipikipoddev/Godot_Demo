@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Entity_Resource" load_steps=3 format=3 uid="uid://pbso8l6xu46m"]
-
-[ext_resource type="Resource" uid="uid://0nb564u6i5cs" path="res://Resources/Attacks/Small_Attack.tres" id="1_dfyny"]
-[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="2_ligl4"]
-
-[resource]
-script = ExtResource("2_ligl4")
-Hp = 5
-Attack = ExtResource("1_dfyny")
