@@ -11,6 +11,6 @@ public partial class Initializer : Node
         new Timer_Controller();
         new Actions_Controller();
         new Over_Time_Controller();
-        new Damage_Controller();
+        new Hp_Change_Controller();
     }
 }

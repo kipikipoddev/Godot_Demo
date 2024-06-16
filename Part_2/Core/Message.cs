@@ -9,6 +9,11 @@ public abstract record Message
 
     public Message()
     {
+        Invoke();
+    }
+
+    public void Invoke()
+    {
         Start();
         Send();
         End();

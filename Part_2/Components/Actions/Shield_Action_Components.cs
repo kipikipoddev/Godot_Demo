@@ -13,6 +13,6 @@ public record Shield_Action_Components : Action_Components
     
     public override void Do(Components target)
     {
-        new Shield_Command(this, target);
+        new Shield_Action_Command(this, target);
     }
 }

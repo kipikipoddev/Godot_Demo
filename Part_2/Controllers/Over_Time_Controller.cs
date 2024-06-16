@@ -20,16 +20,14 @@ public class Over_Time_Controller
 
     private void Over_Time_Command_Handler(Over_Time_Command command)
     {
-        var effect = Get_Or_Create(command);
-        effect.Timer().Start();
-        Do(effect);
+        Create_Or_Reset(command);
     }
 
     private void Update_Message_Handler(Update_Message message)
     {
-        foreach (var effect in effects)
-            if (effect.Timer().Ended)
-                Do(effect);
+        for (int i = 0; i < effects.Count; i++)
+            if (effects[i].Timer().Ended)
+                Do(effects[i]);
     }
 
     private void Do(Effect_Component effect)
@@ -43,26 +41,26 @@ public class Over_Time_Controller
                 effect.Timer().Start();
             else
                 effects.Remove(effect);
-            effect.Action.Do(effect.Parent);
+            effect.Command.Invoke();
         }
     }
 
-    private Effect_Component Get_Or_Create(Over_Time_Command command)
+    private void Create_Or_Reset(Over_Time_Command command)
     {
         var existing = effects.FirstOrDefault(e => Equals(command, e));
         if (existing != null)
-            return existing;
+            existing.Timer().Start();
         else
         {
-            var effect = new Effect_Component(command.Action);
+            var effect = new Effect_Component(command.Action, command.Command);
+            effects.Add(effect);
             command.Target.Add(effect);
-            return effect;
         }
     }
 
     private static bool Equals(Over_Time_Command command, Effect_Component e)
     {
-        return e.Action.Name().Equals(command.Action.Name());
+        return e.Name().Equals(command.Action.Name());
     }
 
     private static bool Can_Do(Effect_Component comp)
