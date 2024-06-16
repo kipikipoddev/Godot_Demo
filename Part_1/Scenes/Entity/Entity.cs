@@ -13,7 +13,7 @@ public partial class Entity : Base_Scene
 
     private Label hp_label;
     private Button attack_button;
-    private Attack_Component attack_model;
+    private Attack_Components attack;
 
     public override void _Ready()
     {
@@ -21,14 +21,14 @@ public partial class Entity : Base_Scene
         hp_label = GetNode<Label>("Hp_Label");
         attack_button = GetNode<Button>("Attack_Button");
         attack_button.Text = Resource.Attack.Name;
-        Model = new Create_Entity_Request(Resource).Result;
-        attack_model = Model.Get<Attack_Component>();
+        Model = new Entity_Components(Resource);
+        attack = Model.Get<Attack_Components>();
     }
 
     public override void Update()
     {
         Set_Hp();
-        attack_button.Disabled = !attack_model.Can(Enemy.Model);
+        attack_button.Disabled = !attack.Can(Enemy.Model);
     }
 
     private void Set_Hp()
@@ -38,6 +38,6 @@ public partial class Entity : Base_Scene
 
     public void On_button_pressed()
     {
-        attack_model.Do(Enemy.Model);
+        attack.Do(Enemy.Model);
     }
 }

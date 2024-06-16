@@ -1,14 +1,15 @@
 using Core;
 using Requests;
+using Resources;
 
 namespace Components_Namespace;
 
 public abstract record Action_Components : Components
 {
-    public Action_Components(string name, int cooldown)
+    public Action_Components(Action_Resource resource)
     {
-        Set(new Name_Component(name));
-        Set(new Timer_Component(cooldown));
+        Set(new Name_Component(resource.Name));
+        Set(new Timer_Component(resource.Cooldown));
     }
 
     public bool Can(Components target)

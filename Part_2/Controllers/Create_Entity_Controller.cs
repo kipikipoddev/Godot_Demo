@@ -27,15 +27,17 @@ public class Create_Entity_Controller
     {
         Action_Components action = null;
         if (resource is Attack_Resource attack)
-            action = new Attack_Action_Components(resource.Name, resource.Cooldown, attack.Damage);
-        if (resource is Heal_Resource heal)
-            action = new Heal_Action_Components(resource.Name, resource.Cooldown, heal.Heal);
-        if (resource is Shield_Resource shield)
-            action = new Shield_Action_Components(resource.Name, resource.Cooldown, shield.Amount);
+            action = new Attack_Action_Components(attack);
+        else if (resource is Heal_Resource heal)
+            action = new Heal_Action_Components(heal);
+        else if (resource is Shield_Resource shield)
+            action = new Shield_Action_Components(shield);
+
         if (resource is Hot_Resource hot)
             action.Set(new Over_Time_Component(hot.Time_Between, hot.Times));
         if (resource is Dot_Resource dot)
             action.Set(new Over_Time_Component(dot.Time_Between, dot.Times));
+            
         return action;
     }
 }

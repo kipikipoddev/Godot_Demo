@@ -4,9 +4,9 @@ using Resources;
 
 namespace Components_Namespace;
 
-public record Attack_Action_Components : Action_Components
+public record Attack_Components : Action_Components
 {
-    public Attack_Action_Components(Attack_Resource resource)
+    public Attack_Components(Attack_Resource resource)
         : base(resource)
     {
         Set(new Amount_Component(resource.Damage));

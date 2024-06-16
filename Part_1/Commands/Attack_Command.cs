@@ -3,7 +3,7 @@ using Core;
 
 namespace Commands;
 
-public record Attack_Command(Attack_Component Attack, Components Target) 
+public record Attack_Command(Attack_Components Attack, Components Target) 
     : Command
 {
 }
