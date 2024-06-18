@@ -55,6 +55,14 @@ public record Components : Component
         return components[typeof(T)].Select(c => (T)c);
     }
 
+    public IEnumerable<T> Get_Components<T>()
+        where T : Component
+    {
+        return Get_All<Components>()
+            .Where(c => c.Has<T>())
+            .SelectMany(c => c.Get_All<T>());
+    }
+
     public void Remove<T>()
     {
         if (Has<T>())

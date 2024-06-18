@@ -30,16 +30,20 @@ public partial class Entity : Base_Scene<Components>
     public override void Update()
     {
         var hp = Model.Hp();
-        hp_lable.Text = hp.Is_Alive ? hp.Hp.ToString() : "Dead";
-
+        hp_lable.Text = Get_Hp(hp);
         var shield = Model.Shield();
         shield_label.Visible = shield != null;
         if (shield != null)
-            shield_label.Text = shield.ToString();
+            shield_label.Text = $"{shield.Value} / {shield.Max}";
     }
 
     private string Get_Name()
     {
         return Model.Name() + (Resource.Armor > 0 ? $" ({Resource.Armor})" : "");
+    }
+
+    private string Get_Hp(Hp_Component hp)
+    {
+        return hp.Is_Alive ? $"{hp.Value} / {hp.Max}" : "Dead";
     }
 }

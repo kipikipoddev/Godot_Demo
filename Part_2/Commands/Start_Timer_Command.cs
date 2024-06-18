@@ -3,6 +3,6 @@ using Core;
 
 namespace Commands;
 
-public record Start_Timer_Command(Timer_Component Component) : Command
+public record Start_Timer_Command(Timer_Component Timer) : Command
 {
 }

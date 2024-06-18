@@ -5,19 +5,19 @@ namespace Components_Namespace;
 
 public record Timer_Component : Component
 {
-    public Ranged_Value<double> Time { get; }
-    public bool In_Progress => Time.Value > 0;
-    public bool Ended => Time.Value <= 0;
+    public double Current { get; set; }
+    public double Interval { get; }
+    public bool In_Progress => Current > 0;
+    public bool Ended => Current <= 0;
 
-    public Timer_Component(int time)
+    public Timer_Component(int interval)
     {
-        Time = new(0, 0, time);
+        Interval = interval;
         Start();
     }
 
     public void Start()
     {
-        Time.Value = Time.Max;
         new Start_Timer_Command(this);
     }
 }
