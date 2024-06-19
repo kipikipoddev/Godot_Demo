@@ -4,6 +4,11 @@ namespace Core;
 
 public abstract record Command : Message
 {
+    public Command(bool invoke = true)
+        : base(invoke)
+    {
+    }
+
     protected override void End()
     {
         if (Indentation == 1)

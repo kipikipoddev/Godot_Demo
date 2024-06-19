@@ -19,15 +19,16 @@ public class Timer_Controller
 
     private void Start_Timer_Command_Handler(Start_Timer_Command cmd)
     {
-        if (!timers.Contains(cmd.Component))
-            timers.Add(cmd.Component);
+        cmd.Timer.Current = cmd.Timer.Interval;
+        if (!timers.Contains(cmd.Timer))
+            timers.Add(cmd.Timer);
     }
 
     private void Time_Message_Handler(Time_Message msg)
     {
         for (int i = 0; i < timers.Count; i++)
         {
-            timers[i].Time.Value -= msg.Delta;
+            timers[i].Current -= msg.Delta;
             if (timers[i].Ended)
             {
                 new Update_Message();

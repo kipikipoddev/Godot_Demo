@@ -4,12 +4,14 @@ namespace Components_Namespace;
 
 public record Hp_Component : Component
 {
-    public Ranged_Value<int> Hp { get; }
-    public bool Is_Alive => Hp.Not_Min;
+    public int Value { get; set; }
+    public int Max { get; set; }
+    public bool Is_Alive => Value > 0;
 
     public Hp_Component(int hp)
     {
-        Hp = new Ranged_Value<int>(hp, 0, hp);
+        Value = hp;
+        Max = hp;
     }
 }
 

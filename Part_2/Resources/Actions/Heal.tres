@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_fv1xe")
 Heal = 2
-Cooldown = 3
+Cooldown = 10

@@ -4,18 +4,20 @@ namespace Components_Namespace;
 
 public record Shield_Component : Component
 {
-    public Ranged_Value<int> Shield { get; set; }
+    public int Value { get; set; }
+    public int Max { get; }
 
     public Shield_Component(int amount)
     {
-        Shield = new(amount, 0, amount);
+        Value = amount;
+        Max = amount;
     }
 }
 
 public static class Shield_Extensions
 {
-    public static Ranged_Value<int> Shield(this Components components)
+    public static Shield_Component Shield(this Components components)
     {
-        return components.Get<Shield_Component>()?.Shield;
+        return components.Get<Shield_Component>();
     }
 }
