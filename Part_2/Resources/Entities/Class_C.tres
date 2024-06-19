@@ -9,4 +9,4 @@
 script = ExtResource("1_ki4ok")
 Hp = 5
 Armor = 0
-Actions = Array[Object]([ExtResource("1_fqfo2"), ExtResource("3_ibw02"), ExtResource("4_32tw8"), ExtResource("1_fqfo2")])
+Actions = Array[Object]([ExtResource("1_fqfo2"), ExtResource("1_fqfo2"), ExtResource("3_ibw02"), ExtResource("4_32tw8")])

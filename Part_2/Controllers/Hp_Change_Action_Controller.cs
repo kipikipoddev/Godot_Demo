@@ -12,10 +12,21 @@ public class Hp_Change_Action_Controller
         Mediator.Add_Listener<Do_Action_Command>(Do_Action_Handler);
     }
 
-    private static void Do_Action_Handler(Do_Action_Command command)
+    private static void Do_Action_Handler(Do_Action_Command cmd)
     {
-        var comp = command.Action.Get<Hp_Change_Action_Component>();
+        var comp = cmd.Action.Get<Hp_Change_Action_Component>();
         if (comp != null)
-            new Hp_Change_Command(command.Action, command.Target, new(comp.Amount, comp.Is_Positive));
+        {
+            new Hp_Change_Command(cmd.Target, comp.Amount);
+            Handle_Over_Time(cmd, comp.Amount);
+        }
     }
+
+    private static void Handle_Over_Time(Do_Action_Command cmd, int amount)
+    {
+        var comp = cmd.Action.Get<Over_Time_Component>();
+        if (comp != null)
+            new Over_Time_Command(comp.Times, comp.Time_Between, cmd.Target, amount, cmd.Action.Name());
+    }
+
 }

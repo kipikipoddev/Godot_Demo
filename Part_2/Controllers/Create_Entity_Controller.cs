@@ -13,36 +13,36 @@ public class Create_Entity_Controller
         Mediator.Add_Listener<Create_Entity_Request, Components>(Create_Entity_Handler);
     }
 
-    private Components Create_Entity_Handler(Create_Entity_Request request)
+    private Components Create_Entity_Handler(Create_Entity_Request req)
     {
-        var resource = request.Resource;
+        var resource = req.Resource;
         return new Components()
             .Set(new Name_Component(resource.Name))
             .Set(new Hp_Component(resource.Hp))
-            .Set(new Armor_Component(request.Resource.Armor))
+            .Set(new Armor_Component(req.Resource.Armor))
             .Add_Range(resource.Actions.Select(Create_Action));
     }
 
-    private Components Create_Action(Action_Resource resource)
+    private Components Create_Action(Action_Resource res)
     {
         var action = new Components()
-            .Set(new Name_Component(resource.Name))
+            .Set(new Name_Component(res.Name))
             .Set(new Action_Component())
-            .Set(new Timer_Component(resource.Cooldown));
+            .Set(new Timer_Component(res.Cooldown));
 
-        if (resource is Attack_Resource attack)
-            action.Set(new Hp_Change_Action_Component(attack.Damage, false));
+        if (res is Attack_Resource attack)
+            action.Set(new Hp_Change_Action_Component(-attack.Damage));
 
-        else if (resource is Heal_Resource heal)
-            action.Set(new Hp_Change_Action_Component(heal.Heal, true));
+        else if (res is Heal_Resource heal)
+            action.Set(new Hp_Change_Action_Component(heal.Heal));
 
-        else if (resource is Shield_Resource shield)
+        else if (res is Shield_Resource shield)
             action.Set(new Shield_Action_Component(shield.Amount));
 
-        //if (resource is Hot_Resource hot)
-        //action.Set(new Over_Time_Component(hot.Time_Between, hot.Times));
-        //if (resource is Dot_Resource dot)
-        //action.Set(new Over_Time_Component(dot.Time_Between, dot.Times));
+        if (res is Hot_Resource hot)
+            action.Set(new Over_Time_Component(hot.Time_Between, hot.Times));
+        if (res is Dot_Resource dot)
+            action.Set(new Over_Time_Component(dot.Time_Between, dot.Times));
 
         return action;
     }

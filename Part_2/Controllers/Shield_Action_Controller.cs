@@ -11,10 +11,10 @@ public class Shield_Action_Controller
         Mediator.Add_Listener<Do_Action_Command>(Do_Action_Handler);
     }
 
-    private static void Do_Action_Handler(Do_Action_Command command)
+    private static void Do_Action_Handler(Do_Action_Command cmd)
     {
-        var comp = command.Action.Get<Shield_Action_Component>();
+        var comp = cmd.Action.Get<Shield_Action_Component>();
         if (comp != null)
-            command.Target.Set(new Shield_Component(comp.Amount));
+            cmd.Target.Set(new Shield_Component(comp.Amount));
     }
 }

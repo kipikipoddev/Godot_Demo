@@ -11,14 +11,14 @@ public class Shield_Controller
         Mediator.Add_Listener<Hp_Change_Command>(Hp_Change_Handler);
     }
 
-    private static void Hp_Change_Handler(Hp_Change_Command command)
+    private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var shield = command.Target.Shield();
-        if (shield == null || command.Data.Is_Positive)
+        var shield = cmd.Target.Shield();
+        if (shield == null || cmd.Amount > 0)
             return;
-        shield.Value -= command.Data.Amount;
-        command.Data.Amount = shield.Value >= 0 ? 0 : -shield.Value;
+        shield.Value += cmd.Amount;
+        cmd.Amount = shield.Value >= 0 ? 0 : shield.Value;
         if (shield.Value <= 0)
-            command.Target.Remove<Shield_Component>();
+            cmd.Target.Remove<Shield_Component>();
     }
 }

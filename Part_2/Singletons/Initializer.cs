@@ -15,5 +15,6 @@ public partial class Initializer : Node
         new Shield_Action_Controller();
         new Hp_Change_Action_Controller();
         new Action_Controller();
+        new Over_Time_Controller();
     }
 }
