@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_2biin")
 Damage = 1
-Cooldown=2
+Cooldown = 2

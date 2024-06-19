@@ -14,14 +14,11 @@ public class Hp_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command command)
     {
+        if (command.Data.Amount == 0)
+            return;
         var hp_comp = command.Target.Hp();
-        hp_comp.Value += Get_Amount(command);
+        hp_comp.Value += command.Data.Amount * (command.Data.Is_Positive ? 1 : -1);
         hp_comp.Value = Get_Bounded(hp_comp);
-    }
-
-    private static int Get_Amount(Hp_Change_Command command)
-    {
-        return command.Action.Amount().Amount * (command.Is_Positive ? 1 : -1);
     }
 
     private static int Get_Bounded(Hp_Component hp_comp)

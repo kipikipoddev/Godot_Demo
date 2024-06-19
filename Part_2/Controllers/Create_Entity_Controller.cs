@@ -31,16 +31,13 @@ public class Create_Entity_Controller
             .Set(new Timer_Component(resource.Cooldown));
 
         if (resource is Attack_Resource attack)
-            action.Set(new Amount_Component(attack.Damage))
-                  .Set(new Hp_Change_Action_Component(false));
+            action.Set(new Hp_Change_Action_Component(attack.Damage, false));
 
         else if (resource is Heal_Resource heal)
-            action.Set(new Amount_Component(heal.Heal))
-                  .Set(new Hp_Change_Action_Component(true));
-                  
+            action.Set(new Hp_Change_Action_Component(heal.Heal, true));
+
         else if (resource is Shield_Resource shield)
-            action.Set(new Shield_Action_Component())
-                  .Set(new Amount_Component(shield.Amount));
+            action.Set(new Shield_Action_Component(shield.Amount));
 
         //if (resource is Hot_Resource hot)
         //action.Set(new Over_Time_Component(hot.Time_Between, hot.Times));

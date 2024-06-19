@@ -2,6 +2,6 @@ using Core;
 
 namespace Components_Namespace;
 
-public record Shield_Action_Component() : Component
+public record Shield_Action_Component(int Amount) : Component
 {
 }

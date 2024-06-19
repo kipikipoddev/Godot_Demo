@@ -14,17 +14,11 @@ public class Shield_Controller
     private static void Hp_Change_Handler(Hp_Change_Command command)
     {
         var shield = command.Target.Shield();
-        if (shield == null)
+        if (shield == null || command.Data.Is_Positive)
             return;
-        var amount_comp = command.Action.Amount();
-        shield.Value -= amount_comp.Amount;
+        shield.Value -= command.Data.Amount;
+        command.Data.Amount = shield.Value >= 0 ? 0 : -shield.Value;
         if (shield.Value <= 0)
-        {
-            amount_comp.Amount = -shield.Value;
             command.Target.Remove<Shield_Component>();
-        }
-        else
-            amount_comp.Amount = 0;
-
     }
 }

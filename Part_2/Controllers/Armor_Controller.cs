@@ -15,10 +15,15 @@ public class Armor_Controller
     private static void Hp_Change_Handler(Hp_Change_Command command)
     {
         var armor_comp = command.Target.Armor();
-        if (armor_comp?.Armor > 0)
-        {
-            var amount_comp = command.Action.Amount();
-            amount_comp.Amount = Math.Max(1, amount_comp.Amount - armor_comp.Armor);
-        }
+        if (Should_Reduce_Armor(command, armor_comp))
+            command.Data.Amount = Math.Max(1, command.Data.Amount - armor_comp.Armor);
     }
+
+    private static bool Should_Reduce_Armor(Hp_Change_Command command, Armor_Component armor_comp)
+    {
+        return armor_comp?.Armor > 0 & 
+            !command.Data.Is_Positive & 
+            command.Data.Amount > 0;
+    }
+
 }

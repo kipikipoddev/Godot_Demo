@@ -16,6 +16,6 @@ public class Hp_Change_Action_Controller
     {
         var comp = command.Action.Get<Hp_Change_Action_Component>();
         if (comp != null)
-            new Hp_Change_Command(command.Action, command.Target, comp.Is_Positive);
+            new Hp_Change_Command(command.Action, command.Target, new(comp.Amount, comp.Is_Positive));
     }
 }
