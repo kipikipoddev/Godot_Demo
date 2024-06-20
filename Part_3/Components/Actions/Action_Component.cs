@@ -5,7 +5,7 @@ using Requests;
 
 namespace Components_Namespace;
 
-public record Action_Component(bool Is_Friendly) : Component
+public record Action_Component(bool On_Friendly, bool On_Live_Target) : Component
 {
     public bool Can(Components target)
     {

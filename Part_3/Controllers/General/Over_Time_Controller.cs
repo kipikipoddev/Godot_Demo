@@ -21,22 +21,20 @@ public class Over_Time_Controller
     private void Update_Handler(Update_Message msg)
     {
         for (int i = 0; i < commands.Count; i++)
-            if (commands[i].Timer.Ended)
+        {
+            if (!Can_Run(commands[i]))
+                commands.Remove(commands[i]);
+            else if (commands[i].Timer.Ended)
                 Run(commands[i]);
-
+        }
     }
     private void Run(Over_Time_Command cmd)
     {
-        if (!Can_Run(cmd))
+        new Hp_Change_Command(cmd.Target, cmd.Amount);
+        if (++cmd.Runs == cmd.Times - 1)
             commands.Remove(cmd);
         else
-        {
-            new Hp_Change_Command(cmd.Target, cmd.Amount);
-            if (++cmd.Runs == cmd.Times - 1)
-                commands.Remove(cmd);
-            else
-                cmd.Timer.Start();
-        }
+            cmd.Timer.Start();
     }
 
     private void Over_Time_Handler(Over_Time_Command cmd)

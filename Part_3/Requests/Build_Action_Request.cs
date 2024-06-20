@@ -3,7 +3,7 @@ using Resources;
 
 namespace Requests;
 
-public record Create_Action_Request(Action_Resource Resource)
+public record Build_Action_Request(Action_Resource Resource)
     : Request<Components>
 {
 }

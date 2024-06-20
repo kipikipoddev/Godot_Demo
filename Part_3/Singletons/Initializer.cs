@@ -7,7 +7,7 @@ public partial class Initializer : Node
 {
     public Initializer()
     {
-        new Create_Entity_Controller();
+        new Build_Entity_Controller();
         new Timer_Controller();
         new Shield_Controller();
         new Armor_Controller();
@@ -17,6 +17,7 @@ public partial class Initializer : Node
         new Action_Controller();
         new Over_Time_Controller();
         new Target_Controller();
-        new Create_Action_Controller();
+        new Build_Action_Controller();
+        new Rise_Action_Controller();
     }
 }

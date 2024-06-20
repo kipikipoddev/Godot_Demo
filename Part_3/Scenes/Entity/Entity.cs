@@ -10,7 +10,7 @@ public partial class Entity : Base_Scene<Components>
     [Export]
     public Entity_Resource Resource;
 
-	[Export(PropertyHint.Range, "1,2")]
+    [Export(PropertyHint.Range, "1,2")]
     public int Group;
 
     private Label name_label;
@@ -19,7 +19,7 @@ public partial class Entity : Base_Scene<Components>
 
     public override void _Ready()
     {
-        Model = new Create_Entity_Request(Resource, Group).Result;
+        Model = new Build_Entity_Request(Resource, Group).Result;
 
         hp_lable = GetNode<Label>("Hp_Label");
         shield_label = GetNode<Label>("Shield_Label");
@@ -28,7 +28,6 @@ public partial class Entity : Base_Scene<Components>
 
         name_label.Text = Get_Name();
         actions.Model = Model.Get_Actions().ToArray();
-        name_label.Modulate = Model.Group() == 1 ? Colors.Blue : Colors.Red;
     }
 
     public override void Update()
@@ -39,6 +38,7 @@ public partial class Entity : Base_Scene<Components>
         shield_label.Visible = shield != null;
         if (shield != null)
             shield_label.Text = $"{shield.Value} / {shield.Max}";
+        name_label.Modulate = Model.Group() == 1 ? Colors.Blue : Colors.Red;
     }
 
     private string Get_Name()
