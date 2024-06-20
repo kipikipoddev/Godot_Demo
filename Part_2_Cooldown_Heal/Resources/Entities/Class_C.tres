@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=3 format=3 uid="uid://c4vd3vly8331t"]
+
+[ext_resource type="Resource" uid="uid://cw4l0ffalboi5" path="res://Resources/Actions/Heal.tres" id="1_fqfo2"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="1_ki4ok"]
+
+[resource]
+script = ExtResource("1_ki4ok")
+Hp = 5
+Actions = Array[Object]([ExtResource("1_fqfo2"), ExtResource("1_fqfo2")])
