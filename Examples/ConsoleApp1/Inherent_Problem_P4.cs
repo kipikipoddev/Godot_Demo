@@ -23,12 +23,9 @@ public class Components
 
     public T Get<T>()
     {
-        return (T)components[typeof(T)];
-    }
-
-    public bool Has<T>()
-    {
-        return components.ContainsKey(typeof(T));
+        return components.ContainsKey(typeof(T)) ?
+            (T)components[typeof(T)] :
+            default!;
     }
 }
 
@@ -37,7 +34,6 @@ public class Runner
     public void Method(Components components)
     {
         components.Get<Class_A>().A();
-        if (components.Has<Class_B>())
-            components.Get<Class_B>().B();
+        components.Get<Class_B>()?.B();
     }
 }

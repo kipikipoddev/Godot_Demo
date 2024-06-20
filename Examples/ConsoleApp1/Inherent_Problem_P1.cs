@@ -16,7 +16,6 @@ public class Runner
     public void Method(Class_A obj_a, Class_B obj_b)
     {
         obj_a.A();
-        if (obj_b != null)
-            obj_b.B();
+        obj_b?.B();
     }
 }

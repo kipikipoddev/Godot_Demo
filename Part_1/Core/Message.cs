@@ -5,9 +5,15 @@ namespace Core;
 
 public abstract record Message
 {
-    protected static int Indentation { get; private set; }
+    protected static int Indentation = 0;
 
-    public Message()
+    public Message(bool invoke = true)
+    {
+        if (invoke)
+            Invoke();
+    }
+
+    public void Invoke()
     {
         Start();
         Send();

@@ -1,10 +1,19 @@
-using Messages;
 using Core;
 using Godot;
+using Messages;
 
-public partial class Base_Scene : Node2D
+public partial class Base_Scene<T> : Node2D
 {
-    public Components Model;
+    private T model;
+    public T Model
+    {
+        get => model;
+        set
+        {
+            model = value;
+            On_model_changed();
+        }
+    }
 
     public Base_Scene()
     {
@@ -12,4 +21,5 @@ public partial class Base_Scene : Node2D
     }
 
     public virtual void Update() { }
+    protected virtual void On_model_changed() { }
 }

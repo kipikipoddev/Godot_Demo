@@ -44,6 +44,6 @@ public partial class Entity : Base_Scene<Components>
 
     private string Get_Hp(Hp_Component hp)
     {
-        return hp.Is_Alive ? $"{hp.Value} / {hp.Max}" : "Dead";
+        return hp.Is_Alive ? $"{hp.Value:d2} / {hp.Max:d2}" : "Dead";
     }
 }

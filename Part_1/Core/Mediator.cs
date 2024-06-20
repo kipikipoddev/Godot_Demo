@@ -5,32 +5,44 @@ namespace Core;
 
 public static class Mediator
 {
-    private static readonly Dictionary<Type, List<Action<object>>> listeners = new();
-    private static readonly Dictionary<Type, Func<object, object>> handlers = new();
+    private static readonly Dictionary<Type, List<Action<object>>> message_listeners = new();
+    private static readonly Dictionary<Type, List<Func<object, object>>> request_listeners = new();
 
     public static void Send(Message message)
     {
         var type = message.GetType();
-        if (listeners.ContainsKey(type))
-            listeners[type].ForEach(l => l(message));
+        if (message_listeners.ContainsKey(type))
+            message_listeners[type].ForEach(l => l(message));
     }
 
     public static V Send<V>(Request<V> request)
     {
-        return (V)handlers[request.GetType()](request);
+        var type = request.GetType();
+        if (request_listeners.ContainsKey(type))
+        {
+            foreach (var listener in request_listeners[type])
+            {
+                var result = listener(request);
+                if (result != default)
+                    return (V)result;
+            }
+        }
+        return default;
     }
 
     public static void Add_Listener<T>(Action<T> listener)
         where T : Message
     {
-        if (!listeners.ContainsKey(typeof(T)))
-            listeners[typeof(T)] = new();
-        listeners[typeof(T)].Add(o => listener((T)o));
+        if (!message_listeners.ContainsKey(typeof(T)))
+            message_listeners[typeof(T)] = new();
+        message_listeners[typeof(T)].Add(o => listener((T)o));
     }
 
-    public static void Set_Handler<T, V>(Func<T, V> handler)
+    public static void Add_Listener<T, V>(Func<T, V> listener)
         where T : Request<V>
     {
-        handlers[typeof(T)] = o => handler((T)o);
+        if (!request_listeners.ContainsKey(typeof(T)))
+            request_listeners[typeof(T)] = new();
+        request_listeners[typeof(T)].Add(o => listener((T)o));
     }
 }

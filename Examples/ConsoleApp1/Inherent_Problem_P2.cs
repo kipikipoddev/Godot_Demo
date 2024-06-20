@@ -10,7 +10,7 @@ public class Class_B
     public void B() { }
 }
 
-public record Class_AB(Class_A a, Class_B b)
+public record Class_AB(Class_A A, Class_B B)
 {
 }
 
@@ -18,8 +18,7 @@ public class Runner
 {
     public void Method(Class_AB class_ab)
     {
-        class_ab.a.A();
-        if (class_ab.b != null)
-            class_ab.b.B();
+        class_ab.A.A();
+        class_ab.B?.B();
     }
 }

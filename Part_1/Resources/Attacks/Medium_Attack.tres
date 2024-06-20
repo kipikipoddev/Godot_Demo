@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_wtq6j")
-Damage = 2
+Damage = 3
+Cooldown = 4

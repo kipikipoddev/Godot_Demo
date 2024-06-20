@@ -26,7 +26,7 @@ public class Components
         return (T)components[typeof(T)];
     }
 
-    public bool Has<T>()
+    public bool Contains<T>()
     {
         return components.ContainsKey(typeof(T));
     }
@@ -41,7 +41,7 @@ public static class Component_Extensions
 
     public static void B(this Components components)
     {
-        if (components.Has<Class_B>())
+        if (components.Contains<Class_B>())
             components.Get<Class_B>().B();
     }
 }

@@ -5,9 +5,9 @@ namespace Resources;
 [GlobalClass]
 public partial class Entity_Resource : Named_Resource
 {
-    [Export]
+    [Export(PropertyHint.Range, "1,10")]
     public int Hp;
 
     [Export]
-    public Attack_Resource Attack;
+    public Attack_Resource Action;
 }

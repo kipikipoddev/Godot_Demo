@@ -3,8 +3,8 @@ using Godot;
 namespace Resources;
 
 [GlobalClass]
-public partial class Attack_Resource : Named_Resource
+public partial class Attack_Resource : Action_Resource
 {
-	[Export]
+	[Export(PropertyHint.Range, "1,10")]
 	public int Damage;
 }

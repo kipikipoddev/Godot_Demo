@@ -1,6 +1,6 @@
 
 
-namespace Inherent_Problem_P2;
+namespace Inherent_Problem_P3;
 
 public interface Int_A
 {
@@ -24,25 +24,31 @@ public class Class_B : Int_B
 
 public class Class_C : Class_A, Int_B
 {
-    private Int_B b;
+    private readonly Int_B b;
 
     public Class_C(Int_B b)
     {
         this.b = b;
     }
-    
+
     public void B()
     {
-        if (B != null)
-            b.B();
+        b.B();
     }
 }
 
 public class Runner
 {
-    public void Method(Class_C class_C)
+    public void Method1(Class_C class_c)
     {
-        class_C.A();
-        class_C.B();
+        class_c.A();
+        class_c.B();
+    }
+
+    public void Method2<T>(T obj)
+        where T : Int_A, Int_B
+    {
+        obj.A();
+        obj.B();
     }
 }
