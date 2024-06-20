@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Rise_Resource" load_steps=2 format=3 uid="uid://cpuh3d8qu0xjc"]
+[gd_resource type="Resource" script_class="Rise_Resource" load_steps=3 format=3 uid="uid://cpuh3d8qu0xjc"]
 
-[ext_resource type="Script" path="res://Resources/Definitions/Rise_Resource.cs" id="1_qs5im"]
+[ext_resource type="Resource" uid="uid://dr4xb1yj13jjl" path="res://Resources/Types/Dark_Magic.tres" id="1_ktmw0"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Rise_Resource.cs" id="1_qs5im"]
 
 [resource]
 script = ExtResource("1_qs5im")
 Cooldown = 7
+Type = ExtResource("1_ktmw0")

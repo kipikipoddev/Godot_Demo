@@ -9,10 +9,10 @@ public class Build_Action_Controller
 {
     public Build_Action_Controller()
     {
-        Mediator.Add_Handler<Build_Action_Request, Components>(Create_Action_Handler);
+        Mediator.Add_Handler<Build_Action_Request, Components>(Build_Action_Handler);
     }
 
-    private Components Create_Action_Handler(Build_Action_Request req)
+    private Components Build_Action_Handler(Build_Action_Request req)
     {
         var res = req.Resource;
         var action = new Components()

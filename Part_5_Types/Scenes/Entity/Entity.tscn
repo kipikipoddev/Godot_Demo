@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bedqabt6k5ngk" path="res://icon.svg" id="1_c5s4f"]
 [ext_resource type="PackedScene" uid="uid://ddorpvmtc8f51" path="res://Scenes/Actions_Scene/Actions_Scene.tscn" id="3_nd4ly"]
 
-[node name="Entity" type="Node2D" node_paths=PackedStringArray("Targets")]
+[node name="Entity" type="Node2D"]
 script = ExtResource("1_4e7o4")
-Targets = []
+Group = null
 
 [node name="Name_Label" type="Label" parent="."]
 offset_left = -32.0
@@ -37,4 +37,17 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_c5s4f")
 
 [node name="Actions" parent="." instance=ExtResource("3_nd4ly")]
-position = Vector2(0, 48)
+position = Vector2(0, 53)
+
+[node name="Armor" type="HBoxContainer" parent="."]
+offset_left = -33.0
+offset_top = 28.0
+offset_right = 33.0
+offset_bottom = 51.0
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Armor"]
+layout_mode = 2
+text = "Armor:"

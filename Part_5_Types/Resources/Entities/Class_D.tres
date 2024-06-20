@@ -2,10 +2,10 @@
 
 [ext_resource type="Resource" uid="uid://u3jfof3oeind" path="res://Resources/Actions/Revive.tres" id="1_50xt0"]
 [ext_resource type="Resource" uid="uid://cpuh3d8qu0xjc" path="res://Resources/Actions/Rise.tres" id="2_df5lh"]
-[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="4_btnku"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity/Entity_Resource.cs" id="4_btnku"]
 
 [resource]
 script = ExtResource("4_btnku")
-Hp = 5
-Armor = 0
+Hp = 7
+Armor = Array[Object]([])
 Actions = Array[Object]([ExtResource("1_50xt0"), ExtResource("2_df5lh")])

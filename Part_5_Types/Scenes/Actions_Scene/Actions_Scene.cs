@@ -33,6 +33,7 @@ public partial class Actions_Scene : Base_Scene<Action_Component[]>
     {
         var button = new Button();
         button.Text = Model[index].Parent.Name();
+        button.Modulate = Model[index].Parent.Type().Color;
         button.Pressed += () => Model[index].Do(targets[index]);
         return button;
     }

@@ -26,28 +26,43 @@ public partial class Entity : Base_Scene<Components>
         var actions = GetNode<Actions_Scene>("Actions");
         name_label = GetNode<Label>("Name_Label");
 
-        name_label.Text = Get_Name();
+        name_label.Text = Model.Name();
         actions.Model = Model.Get_Actions().ToArray();
+        Set_Armor();
     }
 
     public override void Update()
     {
         var hp = Model.Hp();
         hp_lable.Text = Get_Hp(hp);
-        var shield = Model.Shield();
-        shield_label.Visible = shield != null;
-        if (shield != null)
-            shield_label.Text = $"{shield.Value} / {shield.Max}";
+        Update_Shield();
         name_label.Modulate = Model.Group() == 1 ? Colors.Blue : Colors.Red;
-    }
-
-    private string Get_Name()
-    {
-        return Model.Name() + (Resource.Armor > 0 ? $" ({Resource.Armor})" : "");
     }
 
     private string Get_Hp(Hp_Component hp)
     {
         return hp.Is_Alive ? $"{hp.Value:d2} / {hp.Max:d2}" : "Dead";
+    }
+
+    private void Update_Shield()
+    {
+        var shield = Model.Shield();
+        shield_label.Visible = shield != null;
+        if (shield != null)
+            shield_label.Text = $"{shield.Value} / {shield.Max}";
+    }
+
+    private void Set_Armor()
+    {
+        var armor_vb = GetNode<HBoxContainer>("Armor");
+        foreach (var armor in Model.Get_Armors())
+        {
+            var label = new Label
+            {
+                Text = armor.Amount.ToString(),
+                Modulate = armor.Parent.Type().Color
+            };
+            armor_vb.AddChild(label);
+        }
     }
 }

@@ -19,7 +19,7 @@ public partial class Entity : Base_Scene<Components>
 
     public override void _Ready()
     {
-        Model = new Create_Entity_Request(Resource).Result;
+        Model = new Build_Entity_Request(Resource).Result;
 
         hp_lable = GetNode<Label>("Hp_Label");
         GetNode<Label>("Name_Label").Text = Get_Name();

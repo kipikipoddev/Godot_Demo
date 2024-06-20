@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Dot_Resource" load_steps=2 format=3 uid="uid://jxd1a7k680o5"]
+[gd_resource type="Resource" script_class="Dot_Resource" load_steps=3 format=3 uid="uid://jxd1a7k680o5"]
 
-[ext_resource type="Script" path="res://Resources/Definitions/Dot_Resource.cs" id="1_dpoff"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Dot_Resource.cs" id="1_dpoff"]
+[ext_resource type="Resource" uid="uid://cjpx7euj1ncr3" path="res://Resources/Types/Physical.tres" id="1_yr2r8"]
 
 [resource]
 script = ExtResource("1_dpoff")
@@ -8,3 +9,4 @@ Time_Between = 5
 Times = 3
 Damage = 3
 Cooldown = 5
+Type = ExtResource("1_yr2r8")

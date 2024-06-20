@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Hot_Resource" load_steps=2 format=3 uid="uid://cu4qnpr6jjuw5"]
+[gd_resource type="Resource" script_class="Hot_Resource" load_steps=3 format=3 uid="uid://cu4qnpr6jjuw5"]
 
-[ext_resource type="Script" path="res://Resources/Definitions/Hot_Resource.cs" id="1_gnpvf"]
+[ext_resource type="Resource" uid="uid://xph56vs5qf06" path="res://Resources/Types/Natural.tres" id="1_5gvwu"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Hot_Resource.cs" id="1_gnpvf"]
 
 [resource]
 script = ExtResource("1_gnpvf")
@@ -8,3 +9,4 @@ Time_Between = 3
 Times = 3
 Heal = 1
 Cooldown = 3
+Type = ExtResource("1_5gvwu")

@@ -10,10 +10,10 @@ public class Build_Entity_Controller
 {
     public Build_Entity_Controller()
     {
-        Mediator.Add_Handler<Build_Entity_Request, Components>(Create_Entity_Handler);
+        Mediator.Add_Handler<Build_Entity_Request, Components>(Build_Entity_Handler);
     }
 
-    private Components Create_Entity_Handler(Build_Entity_Request req)
+    private Components Build_Entity_Handler(Build_Entity_Request req)
     {
         var resource = req.Resource;
         return new Components()
