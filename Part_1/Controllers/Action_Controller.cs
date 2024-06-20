@@ -1,4 +1,3 @@
-using Commands;
 using Components_Namespace;
 using Core;
 using Requests;
@@ -9,7 +8,7 @@ public class Action_Controller
 {
     public Action_Controller()
     {
-        Mediator.Add_Listener<Can_Action_Request, bool>(Can_Action_Handler);
+        Mediator.Add_Handler<Can_Action_Request, bool>(Can_Action_Handler);
     }
 
     private static bool Can_Action_Handler(Can_Action_Request req)

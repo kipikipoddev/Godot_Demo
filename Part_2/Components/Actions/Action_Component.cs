@@ -27,6 +27,6 @@ public static class Action_Extensions
 
     public static IEnumerable<Action_Component> Get_Actions(this Components components)
     {
-        return components.Get_Components<Action_Component>();
+        return components.Get_Has<Action_Component>();
     }
 }

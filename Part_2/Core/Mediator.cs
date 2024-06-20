@@ -6,7 +6,7 @@ namespace Core;
 public static class Mediator
 {
     private static readonly Dictionary<Type, List<Action<object>>> message_listeners = new();
-    private static readonly Dictionary<Type, List<Func<object, object>>> request_listeners = new();
+    private static readonly Dictionary<Type, Func<object, object>> requests_handler = new();
 
     public static void Send(Message message)
     {
@@ -17,17 +17,8 @@ public static class Mediator
 
     public static V Send<V>(Request<V> request)
     {
-        var type = request.GetType();
-        if (request_listeners.ContainsKey(type))
-        {
-            foreach (var listener in request_listeners[type])
-            {
-                var result = listener(request);
-                if (result != default)
-                    return (V)result;
-            }
-        }
-        return default;
+        var listener = requests_handler[request.GetType()];
+        return (V)listener(request);
     }
 
     public static void Add_Listener<T>(Action<T> listener)
@@ -38,11 +29,9 @@ public static class Mediator
         message_listeners[typeof(T)].Add(o => listener((T)o));
     }
 
-    public static void Add_Listener<T, V>(Func<T, V> listener)
+    public static void Add_Handler<T, V>(Func<T, V> listener)
         where T : Request<V>
     {
-        if (!request_listeners.ContainsKey(typeof(T)))
-            request_listeners[typeof(T)] = new();
-        request_listeners[typeof(T)].Add(o => listener((T)o));
+        requests_handler[typeof(T)] = o => listener((T)o);
     }
 }

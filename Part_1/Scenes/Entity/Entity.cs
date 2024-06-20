@@ -25,7 +25,7 @@ public partial class Entity : Base_Scene<Components>
         GetNode<Label>("Name_Label").Text = Get_Name();
         attack_button = GetNode<Button>("Attack_Button");
 
-        action = Model.Get_Actions().First();
+        action = Model.Get<Components>().Action();
         attack_button.Text = action.Parent.Name();
     }
 

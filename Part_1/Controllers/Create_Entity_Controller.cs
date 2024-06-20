@@ -10,7 +10,7 @@ public class Create_Entity_Controller
 {
     public Create_Entity_Controller()
     {
-        Mediator.Add_Listener<Create_Entity_Request, Components>(Create_Entity_Handler);
+        Mediator.Add_Handler<Create_Entity_Request, Components>(Create_Entity_Handler);
     }
 
     private Components Create_Entity_Handler(Create_Entity_Request req)
@@ -26,7 +26,6 @@ public class Create_Entity_Controller
     {
         return new Components()
             .Set(new Name_Component(res.Name))
-            .Set(new Action_Component())
             .Set(new Hp_Change_Action_Component(-res.Damage));
     }
 }

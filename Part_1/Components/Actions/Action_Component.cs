@@ -24,9 +24,4 @@ public static class Action_Extensions
     {
         return components.Get<Action_Component>();
     }
-
-    public static IEnumerable<Action_Component> Get_Actions(this Components components)
-    {
-        return components.Get_Components<Action_Component>();
-    }
 }
