@@ -7,4 +7,9 @@ public partial class Main : Node2D
     {
         new Update_Message();
     }
+
+    public override void _Process(double delta)
+    {
+        new Time_Message(delta);
+    }
 }
