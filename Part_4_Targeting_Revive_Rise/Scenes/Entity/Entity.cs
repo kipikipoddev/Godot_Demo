@@ -1,53 +1,42 @@
-using System.Linq;
-using Components_Namespace;
-using Core;
 using Godot;
 using Requests;
 using Resources;
+using Interfaces;
 
-public partial class Entity : Base_Scene<Components>
+public partial class Entity : Base_Scene<IEntity_Model>
 {
     [Export]
     public Entity_Resource Resource;
 
-    [Export(PropertyHint.Range, "1,2")]
-    public int Group;
+    [Export]
+    public Group_Resource Group;
 
-    private Label name_label;
     private Label hp_lable;
     private Label shield_label;
+    private Label name_label;
+
 
     public override void _Ready()
     {
-        Model = new Build_Entity_Request(Resource, Group).Result;
-
         hp_lable = GetNode<Label>("Hp_Label");
         shield_label = GetNode<Label>("Shield_Label");
-        var actions = GetNode<Actions_Scene>("Actions");
+        Model = new Create_Entity_Request(Resource, Group).Result;
         name_label = GetNode<Label>("Name_Label");
-
         name_label.Text = Get_Name();
-        actions.Model = Model.Get_Actions().ToArray();
+        var actions = GetNode<Actions_Scene>("Actions");
+        actions.Model = Model.Actions;
     }
 
     public override void Update()
     {
-        var hp = Model.Hp();
-        hp_lable.Text = Get_Hp(hp);
-        var shield = Model.Shield();
-        shield_label.Visible = shield != null;
-        if (shield != null)
-            shield_label.Text = $"{shield.Value} / {shield.Max}";
-        name_label.Modulate = Model.Group() == 1 ? Colors.Blue : Colors.Red;
+        hp_lable.Text = Model.Hp.Is_Min ? "Dead" : Model.Hp.ToString();
+        shield_label.Visible = !Model.Shield.Is_Min;
+        shield_label.Text = Model.Shield.ToString();
+        name_label.Modulate = Model.Group.Color;
     }
 
     private string Get_Name()
     {
-        return Model.Name() + (Resource.Armor > 0 ? $" ({Resource.Armor})" : "");
-    }
-
-    private string Get_Hp(Hp_Component hp)
-    {
-        return hp.Is_Alive ? $"{hp.Value:d2} / {hp.Max:d2}" : "Dead";
+        return Model.Name + (Model.Armor > 0 ? $" ({Model.Armor})" : "");
     }
 }

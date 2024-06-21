@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Commands;
-using Components_Namespace;
 using Core;
 using Messages;
+using Interfaces;
 
 namespace Controllers;
 
 public class Timer_Controller
 {
-    private readonly List<Timer_Component> timers;
+    private readonly List<ITimer_Model> timers;
 
     public Timer_Controller()
     {

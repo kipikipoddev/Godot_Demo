@@ -3,6 +3,8 @@ using Core;
 using Requests;
 using Resources;
 using Interfaces;
+using Messages;
+using System.Linq;
 
 namespace Controllers;
 
@@ -15,7 +17,8 @@ public class Build_Entity_Controller
 
     private IEntity_Model Build_Entity_Handler(Create_Entity_Request req)
     {
-        return new Entity_Model(req.Resource, Action_Mapper);
+        var actions = req.Resource.Actions.Select(Action_Mapper).ToArray();
+        return new Entity_Model(req.Resource, actions);
     }
 
     private IAction_Model Action_Mapper(Action_Resource resource)

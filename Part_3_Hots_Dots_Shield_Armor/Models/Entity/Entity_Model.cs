@@ -12,13 +12,13 @@ public class Entity_Model : Name_Model, IEntity_Model
     public IValue_Model Shield { get; }
     public IAction_Model[] Actions { get; }
 
-    public Entity_Model(Entity_Resource resource, Func<Action_Resource, IAction_Model> action_mapper)
+    public Entity_Model(Entity_Resource resource, IAction_Model[] actions)
         : base(resource)
     {
         Hp = new Value_Model(resource.Hp);
         Armor = resource.Armor;
         Shield = new Value_Model(0);
-        Actions = resource.Actions.Select(action_mapper).ToArray();
+        Actions = actions;
         foreach (var action in Actions)
             action.Owner = this;
     }

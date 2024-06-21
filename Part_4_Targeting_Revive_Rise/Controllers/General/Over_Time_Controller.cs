@@ -1,59 +1,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using Commands;
-using Components_Namespace;
 using Core;
+using Data;
 using Messages;
 
 namespace Controllers;
 
 public class Over_Time_Controller
 {
-    private readonly List<Over_Time_Command> commands;
+    private readonly List<Over_Time_Data> over_time_datas;
 
     public Over_Time_Controller()
     {
-        commands = new();
+        over_time_datas = new();
         Mediator.Add_Listener<Over_Time_Command>(Over_Time_Handler);
         Mediator.Add_Listener<Update_Message>(Update_Handler);
     }
 
     private void Update_Handler(Update_Message msg)
     {
-        for (int i = 0; i < commands.Count; i++)
+        for (int i = 0; i < over_time_datas.Count; i++)
         {
-            if (!Can_Run(commands[i]))
-                commands.Remove(commands[i]);
-            else if (commands[i].Timer.Ended)
-                Run(commands[i]);
+            if (!over_time_datas[i].Command.Can_Run())
+                over_time_datas.RemoveAt(i);
+            else if (over_time_datas[i].Timer.Ended)
+                Run(over_time_datas[i]);
         }
     }
-    private void Run(Over_Time_Command cmd)
+    private void Run(Over_Time_Data data)
     {
-        new Hp_Change_Command(cmd.Target, cmd.Amount);
-        if (++cmd.Runs == cmd.Times - 1)
-            commands.Remove(cmd);
+        data.Command.Command.Invoke();
+        if (--data.Runs_Left == 0)
+            over_time_datas.Remove(data);
         else
-            cmd.Timer.Start();
+            data.Timer.Start();
     }
 
     private void Over_Time_Handler(Over_Time_Command cmd)
     {
-        var existing = commands.FirstOrDefault(c => c.Name == cmd.Name);
+        var existing = over_time_datas.FirstOrDefault(o => o.Command.Model.Name == cmd.Model.Name);
         if (existing != null)
         {
             existing.Timer.Start();
-            existing.Runs = 0;
+            existing.Runs_Left = cmd.Model.Times - 1;
         }
         else
-        {
-            cmd.Timer = new Timer_Component(cmd.Time_Between);
-            commands.Add(cmd);
-        }
-    }
-
-    private bool Can_Run(Over_Time_Command cmd)
-    {
-        return cmd.Target.Hp().Is_Alive;
+            over_time_datas.Add(new Over_Time_Data(cmd));
     }
 }
