@@ -1,20 +1,19 @@
-using Components_Namespace;
-using Core;
 using Godot;
+using Interfaces;
 using Messages;
 
-public partial class Actions_Scene : Base_Scene<Action_Component[]>
+public partial class Actions_Scene : Base_Scene<IAction_Model[]>
 {
     private Button[] buttons;
-    private Components[] targets;
+
+    private IEntity_Model[] targets;
 
     public override void Update()
     {
-        targets = new Components[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
         {
             targets[i] = new Get_Target_Request(Model[i]).Result;
-            buttons[i].Disabled = !Model[i].Can(targets[i]);
+            buttons[i].Disabled = targets[i] == null;
         }
     }
 
@@ -27,12 +26,13 @@ public partial class Actions_Scene : Base_Scene<Action_Component[]>
             buttons[i] = Get_Button(i);
             vb.AddChild(buttons[i]);
         }
+        targets = new IEntity_Model[buttons.Length];
     }
 
     private Button Get_Button(int index)
     {
         var button = new Button();
-        button.Text = Model[index].Parent.Name();
+        button.Text = Model[index].Name;
         button.Pressed += () => Model[index].Do(targets[index]);
         return button;
     }

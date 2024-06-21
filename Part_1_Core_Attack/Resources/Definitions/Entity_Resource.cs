@@ -9,5 +9,5 @@ public partial class Entity_Resource : Named_Resource
     public int Hp;
 
     [Export]
-    public Attack_Resource Action;
+    public Action_Resource Action;
 }

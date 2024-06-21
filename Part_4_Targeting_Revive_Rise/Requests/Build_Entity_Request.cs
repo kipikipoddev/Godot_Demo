@@ -1,9 +1,10 @@
 using Core;
+using Interfaces;
 using Resources;
 
 namespace Requests;
 
-public record Build_Entity_Request(Entity_Resource Resource, int Group)
-    : Request<Components>
+public record Create_Entity_Request(Entity_Resource Resource, Group_Resource Group)
+    : Request<IEntity_Model>
 {
 }

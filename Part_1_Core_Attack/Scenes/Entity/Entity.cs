@@ -1,53 +1,39 @@
 using System.Linq;
-using Components_Namespace;
-using Core;
 using Godot;
 using Requests;
 using Resources;
+using Interfaces;
 
-public partial class Entity : Base_Scene<Components>
+public partial class Entity : Base_Scene<IEntity_Model>
 {
     [Export]
     public Entity_Resource Resource;
 
     [Export]
-    public Entity Target;
+    public Entity[] Targets;
 
     private Label hp_lable;
-    private Button attack_button;
-    private Action_Component action;
+    private Button action;
+    private IEntity_Model target;
 
     public override void _Ready()
     {
-        Model = new Build_Entity_Request(Resource).Result;
-
         hp_lable = GetNode<Label>("Hp_Label");
-        GetNode<Label>("Name_Label").Text = Get_Name();
-        attack_button = GetNode<Button>("Attack_Button");
-
-        action = Model.Get<Components>().Action();
-        attack_button.Text = action.Parent.Name();
+        Model = new Create_Entity_Request(Resource).Result;
+        GetNode<Label>("Name_Label").Text = Model.Name;
+        action = GetNode<Button>("Action");
+        action.Text = Model.Action.Name;
     }
 
     public override void Update()
     {
-        var hp = Model.Hp();
-        hp_lable.Text = Get_Hp(hp);
-        attack_button.Disabled = !action.Can(Target.Model);
+        hp_lable.Text = Model.Hp.Is_Min ? "Dead" : Model.Hp.ToString();
+        target = Targets.FirstOrDefault(t => t.Model.Is_Alive)?.Model;
+        action.Disabled = !Model.Action.Can(target);
     }
 
-    private string Get_Name()
+    public void On_Action_Pressed()
     {
-        return Model.Name();
-    }
-
-    private string Get_Hp(Hp_Component hp)
-    {
-        return hp.Is_Alive ? $"{hp.Value:d2} / {hp.Max:d2}" : "Dead";
-    }
-
-    public void On_attack_button_pressed()
-    {
-        action.Do(Target.Model);
+        Model.Action.Do(target);
     }
 }

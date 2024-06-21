@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Entity_Resource" load_steps=4 format=3 uid="uid://bbniylgkn1mlw"]
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=4 format=3 uid="uid://ys1jh43jc721"]
 
-[ext_resource type="Resource" uid="uid://u3jfof3oeind" path="res://Resources/Actions/Revive.tres" id="1_50xt0"]
-[ext_resource type="Resource" uid="uid://cpuh3d8qu0xjc" path="res://Resources/Actions/Rise.tres" id="2_df5lh"]
-[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="4_btnku"]
+[ext_resource type="Resource" path="res://Resources/Actions/Revive.tres" id="1_kmfy6"]
+[ext_resource type="Resource" path="res://Resources/Actions/Rise.tres" id="2_tj2hf"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity_Resource.cs" id="4_m5hqj"]
 
 [resource]
-script = ExtResource("4_btnku")
+script = ExtResource("4_m5hqj")
 Hp = 5
 Armor = 0
-Actions = Array[Object]([ExtResource("1_50xt0"), ExtResource("2_df5lh")])
+Actions = Array[Object]([ExtResource("1_kmfy6"), ExtResource("2_tj2hf")])

@@ -1,11 +1,10 @@
 using System.Linq;
-using Components_Namespace;
-using Core;
 using Godot;
 using Requests;
 using Resources;
+using Interfaces;
 
-public partial class Entity : Base_Scene<Components>
+public partial class Entity : Base_Scene<IEntity_Model>
 {
     [Export]
     public Entity_Resource Resource;
@@ -24,26 +23,18 @@ public partial class Entity : Base_Scene<Components>
         GetNode<Label>("Name_Label").Text = Get_Name();
         var actions = GetNode<Actions_Scene>("Actions");
         actions.Targets = Targets.ToList();
-        actions.Model = Model.Get_Actions().ToArray();
+        actions.Model = Model.Actions;
     }
 
     public override void Update()
     {
-        var hp = Model.Hp();
-        hp_lable.Text = Get_Hp(hp);
-        var shield = Model.Shield();
-        shield_label.Visible = shield != null;
-        if (shield != null)
-            shield_label.Text = $"{shield.Value} / {shield.Max}";
+        hp_lable.Text = Model.Hp.Is_Min ? "Dead" : Model.Hp.ToString();
+        shield_label.Visible = !Model.Shield.Is_Min;
+        shield_label.Text = Model.Shield.ToString();
     }
 
     private string Get_Name()
     {
-        return Model.Name() + (Resource.Armor > 0 ? $" ({Resource.Armor})" : "");
-    }
-
-    private string Get_Hp(Hp_Component hp)
-    {
-        return hp.Is_Alive ? $"{hp.Value:d2} / {hp.Max:d2}" : "Dead";
+        return Model.Name + (Model.Armor > 0 ? $" ({Model.Armor})" : "");
     }
 }
