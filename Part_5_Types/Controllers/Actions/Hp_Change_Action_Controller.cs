@@ -16,8 +16,9 @@ public class Hp_Change_Action_Controller
         var comp = cmd.Action.Get<Hp_Change_Action_Component>();
         if (comp != null)
         {
-            new Hp_Change_Command(cmd.Target, comp.Amount);
-            Handle_Over_Time(cmd, comp.Amount);
+            var amount = cmd.Action.Amount().Amount;
+            new Hp_Change_Command(cmd.Target, amount);
+            Handle_Over_Time(cmd, amount);
         }
     }
 

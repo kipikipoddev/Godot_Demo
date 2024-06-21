@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Core;
+using Resources;
 
 namespace Components_Namespace;
 
-public record Armor_Component(int Amount) : Component
+public record Armor_Component(int Amount, Type_Resource Type) : Amount_Component(Amount, Type)
 {
 }
 

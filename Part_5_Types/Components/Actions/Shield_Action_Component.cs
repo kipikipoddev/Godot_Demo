@@ -1,5 +1,5 @@
 namespace Components_Namespace;
 
-public record Shield_Action_Component(int Amount) : Action_Component(true, true)
+public record Shield_Action_Component() : Action_Component(true, true)
 {
 }

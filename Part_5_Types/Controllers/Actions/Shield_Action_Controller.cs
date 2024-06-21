@@ -15,6 +15,6 @@ public class Shield_Action_Controller
     {
         var comp = cmd.Action.Get<Shield_Action_Component>();
         if (comp != null)
-            cmd.Target.Set(new Shield_Component(comp.Amount));
+            cmd.Target.Set(new Shield_Component(cmd.Action.Amount().Amount));
     }
 }

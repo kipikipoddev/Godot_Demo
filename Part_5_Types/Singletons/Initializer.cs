@@ -1,5 +1,6 @@
 using Controllers;
 using Godot;
+using Resources;
 
 namespace Singletons;
 
@@ -7,9 +8,12 @@ public partial class Initializer : Node
 {
     public Initializer()
     {
+        var att = new Attack_Resource();
+        att.Damage = 1;
+        att.Name = "ATT";
+
         new Build_Entity_Controller();
         new Build_Action_Controller();
-        new Build_Type_Controller();
 
         new Timer_Controller();
         new Shield_Controller();

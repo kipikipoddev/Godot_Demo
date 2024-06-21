@@ -55,12 +55,14 @@ public partial class Entity : Base_Scene<Components>
     private void Set_Armor()
     {
         var armor_vb = GetNode<HBoxContainer>("Armor");
-        foreach (var armor in Model.Get_Armors())
+        var armosr_comps = Model.Get_Armors();
+        armor_vb.Visible = armosr_comps.Any();
+        foreach (var armor_comp in armosr_comps)
         {
             var label = new Label
             {
-                Text = armor.Amount.ToString(),
-                Modulate = armor.Parent.Type().Color
+                Text = armor_comp.Amount.ToString(),
+                Modulate = armor_comp.Parent.Amount().Type.Color
             };
             armor_vb.AddChild(label);
         }

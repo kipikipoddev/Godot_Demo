@@ -20,5 +20,9 @@ public partial class Named_Resource : Resource
 			}
 			return name;
 		}
+		set
+		{
+			name = value;
+		}
 	}
 }

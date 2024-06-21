@@ -36,7 +36,6 @@ public class Build_Entity_Controller
     private static Components Get_Armor(Armor_Resource resource)
     {
         return new Components()
-            .Set(new Armor_Component(resource.Amount))
-            .Set(new Build_Type_Request(resource.Type).Result);
+            .Set(new Armor_Component(resource.Amount, resource.Type));
     }
 }

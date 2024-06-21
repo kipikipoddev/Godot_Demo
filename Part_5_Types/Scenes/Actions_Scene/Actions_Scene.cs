@@ -32,8 +32,11 @@ public partial class Actions_Scene : Base_Scene<Action_Component[]>
     private Button Get_Button(int index)
     {
         var button = new Button();
-        button.Text = Model[index].Parent.Name();
-        button.Modulate = Model[index].Parent.Type().Color;
+        var parent = Model[index].Parent;
+        var amount_comp = parent.Amount();
+        var amount_str = amount_comp != null ? $"({amount_comp.Amount})" : "";
+        button.Text = parent.Name() + amount_str;
+        button.Modulate = amount_comp.Type.Color;
         button.Pressed += () => Model[index].Do(targets[index]);
         return button;
     }
