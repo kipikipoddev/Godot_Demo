@@ -1,5 +1,4 @@
 using Commands;
-using Components_Namespace;
 using Core;
 using Requests;
 
@@ -16,13 +15,13 @@ public class Action_Controller
     private static bool Can_Action_Handler(Can_Action_Request req)
     {
         return req.Target != null
-            && req.Target.Hp().Is_Alive
-            && req.Action.Parent.Hp().Is_Alive
-            && req.Action.Timer().Ended;
+            && req.Target.Is_Alive
+            && req.Action.Owner.Is_Alive
+            && req.Action.Cooldown.Ended;
     }
 
     private static void Do_Action_Handler(Do_Action_Command cmd)
     {
-        cmd.Action.Timer().Start();
+        cmd.Action.Cooldown.Start();
     }
 }

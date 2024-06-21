@@ -1,5 +1,5 @@
 using Commands;
-using Components_Namespace;
+using Models;
 using Core;
 
 namespace Controllers;
@@ -13,8 +13,10 @@ public class Shield_Action_Controller
 
     private static void Do_Action_Handler(Do_Action_Command cmd)
     {
-        var comp = cmd.Action.Get<Shield_Action_Component>();
-        if (comp != null)
-            cmd.Target.Set(new Shield_Component(comp.Amount));
+        if (cmd.Action is Shield_Action_Model shield)
+        {
+            cmd.Target.Shield.Max = shield.Amount;
+            cmd.Target.Shield.Value = shield.Amount;
+        }
     }
 }

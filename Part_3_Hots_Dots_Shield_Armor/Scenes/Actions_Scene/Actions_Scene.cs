@@ -1,20 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
-using Components_Namespace;
-using Core;
 using Godot;
+using Interfaces;
 
-public partial class Actions_Scene : Base_Scene<Action_Component[]>
+public partial class Actions_Scene : Base_Scene<IAction_Model[]>
 {
     public List<Entity> Targets;
 
     private Button[] buttons;
 
-    private Components Target => Targets.FirstOrDefault()?.Model;
+    private IEntity_Model Target => Targets.FirstOrDefault()?.Model;
 
     public override void Update()
     {
-        if (!Target?.Hp().Is_Alive ?? false)
+        if (!Target?.Is_Alive ?? false)
             Targets.RemoveAt(0);
         for (int i = 0; i < buttons.Length; i++)
             buttons[i].Disabled = !Model[i].Can(Target);
@@ -34,7 +33,7 @@ public partial class Actions_Scene : Base_Scene<Action_Component[]>
     private Button Get_Button(int index)
     {
         var button = new Button();
-        button.Text = Model[index].Parent.Name();
+        button.Text = Model[index].Name;
         button.Pressed += () => Model[index].Do(Target);
         return button;
     }
