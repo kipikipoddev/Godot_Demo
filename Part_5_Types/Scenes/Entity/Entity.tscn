@@ -6,7 +6,6 @@
 
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_4e7o4")
-Group = null
 
 [node name="Name_Label" type="Label" parent="."]
 offset_left = -32.0

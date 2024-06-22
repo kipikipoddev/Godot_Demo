@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Attack_Resource" load_steps=3 format=3 uid="uid://0nb564u6i5cs"]
 
 [ext_resource type="Script" path="res://Resources/Definitions/Actions/Attack_Resource.cs" id="1_2biin"]
-[ext_resource type="Resource" uid="uid://dt6mggb4n8jke" path="res://Resources/Types/Ice_Magic.tres" id="1_5fs11"]
+[ext_resource type="Resource" uid="uid://dt6mggb4n8jke" path="res://Resources/Types/Ice_Magic.tres" id="1_8qy8o"]
 
 [resource]
 script = ExtResource("1_2biin")
-Damage = 2
+Damage = 4
 Cooldown = 2
-Type = ExtResource("1_5fs11")
+Type = ExtResource("1_8qy8o")

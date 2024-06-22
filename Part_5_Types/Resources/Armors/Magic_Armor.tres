@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("2_0crnc")
-Amount = 1
+Amount = 3
 Type = ExtResource("1_rey3p")

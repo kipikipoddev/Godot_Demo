@@ -2,12 +2,12 @@
 
 [ext_resource type="Resource" uid="uid://buaa025vuqvge" path="res://Resources/Actions/Attacks/Medium_Attack.tres" id="1_xlred"]
 [ext_resource type="Script" path="res://Resources/Definitions/Entity/Entity_Resource.cs" id="2_ei8qg"]
-[ext_resource type="Resource" uid="uid://bjx4hpp33sf6x" path="res://Resources/Armors/Ice_Armor.tres" id="3_k5lox"]
+[ext_resource type="Resource" uid="uid://pwr816h8xey6" path="res://Resources/Armors/Fire_Armor.tres" id="3_lntkt"]
 [ext_resource type="Resource" uid="uid://jxd1a7k680o5" path="res://Resources/Actions/Dots/Meduim_Dot.tres" id="3_omtd5"]
-[ext_resource type="Resource" uid="uid://cl6rv1sapor4a" path="res://Resources/Armors/Magic_Armor.tres" id="4_ay3f1"]
+[ext_resource type="Resource" uid="uid://b23u5iq1emnn3" path="res://Resources/Armors/General_Armor.tres" id="4_k15tc"]
 
 [resource]
 script = ExtResource("2_ei8qg")
-Hp = 15
-Armor = Array[Object]([ExtResource("3_k5lox"), ExtResource("4_ay3f1")])
+Hp = 10
+Armor = Array[Object]([ExtResource("3_lntkt"), ExtResource("4_k15tc")])
 Actions = Array[Object]([ExtResource("1_xlred"), ExtResource("3_omtd5")])

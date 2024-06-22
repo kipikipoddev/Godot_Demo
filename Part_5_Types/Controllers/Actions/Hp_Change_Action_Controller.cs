@@ -1,6 +1,7 @@
 using Commands;
-using Components_Namespace;
+using Models;
 using Core;
+using Interfaces;
 
 namespace Controllers;
 
@@ -13,20 +14,16 @@ public class Hp_Change_Action_Controller
 
     private static void Do_Action_Handler(Do_Action_Command cmd)
     {
-        var comp = cmd.Action.Get<Hp_Change_Action_Component>();
-        if (comp != null)
+        if (cmd.Action is Hp_Change_Action_Model hp_change)
         {
-            var amount = cmd.Action.Amount().Amount;
-            new Hp_Change_Command(cmd.Target, amount);
-            Handle_Over_Time(cmd, amount);
+            var hp_cmd = new Hp_Change_Command(hp_change, cmd.Target);
+            Handle_Over_Time(cmd, hp_cmd);
         }
     }
 
-    private static void Handle_Over_Time(Do_Action_Command cmd, int amount)
+    private static void Handle_Over_Time(Do_Action_Command cmd, Hp_Change_Command hp_cmd)
     {
-        var comp = cmd.Action.Get<Over_Time_Component>();
-        if (comp != null)
-            new Over_Time_Command(comp.Times, comp.Time_Between, cmd.Target, amount, cmd.Action.Name());
+        if (cmd.Action is IOver_Timer_Model over_timer)
+            new Over_Time_Command(over_timer, hp_cmd, () => cmd.Target.Is_Alive);
     }
-
 }

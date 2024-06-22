@@ -1,5 +1,4 @@
 using Commands;
-using Components_Namespace;
 using Core;
 
 namespace Controllers;
@@ -13,12 +12,12 @@ public class Shield_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var shield = cmd.Target.Shield();
-        if (shield == null || cmd.Amount > 0)
+        var shield = cmd.Target.Shield;
+        if (cmd.Model.Is_Positive | shield.Value == 0)
             return;
-        shield.Value += cmd.Amount;
-        cmd.Amount = shield.Value >= 0 ? 0 : shield.Value;
-        if (shield.Value <= 0)
-            cmd.Target.Remove<Shield_Component>();
+
+        var orignal_amount = cmd.Model.Amount.Value;
+        cmd.Model.Amount.Value -= shield.Value;
+        shield.Value -= orignal_amount;
     }
 }

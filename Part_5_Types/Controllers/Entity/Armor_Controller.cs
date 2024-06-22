@@ -1,7 +1,8 @@
 using System;
 using Commands;
-using Components_Namespace;
 using Core;
+using Interfaces;
+using Resources;
 
 namespace Controllers;
 
@@ -14,15 +15,26 @@ public class Armor_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var armor_comps = cmd.Target.Get_Armors();
-        if (cmd.Amount < 0)
-            foreach (var armor_comp in armor_comps)
-                cmd.Amount = Get_Reduced(armor_comp, cmd.Amount);
+        var value = cmd.Model.Amount.Value;
+        if (value > 0 & !cmd.Model.Is_Positive)
+            cmd.Model.Amount.Value = Math.Max(1, value - Get_Reduction(cmd));
     }
 
-    private static int Get_Reduced(Armor_Component armor_comp, int amount)
+    private static int Get_Reduction(Hp_Change_Command cmd)
     {
-        return amount;
+        var reduction = 0;
+        foreach (var armor in cmd.Target.Armor)
+            if (Is_Fit(cmd.Model.Type, armor.Type.Name))
+                reduction += armor.Amount;
+        return reduction;
     }
 
+    private static bool Is_Fit(Type_Resource type, string name)
+    {
+        if (type == null)
+            return false;
+        if (type.Name == name)
+            return true;
+        return Is_Fit(type.Parent, name);
+    }
 }

@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="Entity_Resource" load_steps=7 format=3 uid="uid://c4vd3vly8331t"]
+[gd_resource type="Resource" script_class="Entity_Resource" load_steps=6 format=3 uid="uid://c4vd3vly8331t"]
 
 [ext_resource type="Resource" uid="uid://cw4l0ffalboi5" path="res://Resources/Actions/Heal.tres" id="1_fqfo2"]
-[ext_resource type="Script" path="res://Resources/Definitions/Entity/Entity_Resource.cs" id="1_ki4ok"]
 [ext_resource type="Resource" uid="uid://cu4qnpr6jjuw5" path="res://Resources/Actions/Hot.tres" id="3_ibw02"]
+[ext_resource type="Resource" uid="uid://cl6rv1sapor4a" path="res://Resources/Armors/Magic_Armor.tres" id="4_07ja3"]
 [ext_resource type="Resource" uid="uid://b8s2iy2ujuiig" path="res://Resources/Actions/Shield.tres" id="4_32tw8"]
-[ext_resource type="Resource" uid="uid://b23u5iq1emnn3" path="res://Resources/Armors/General_Armor.tres" id="4_ujysv"]
-[ext_resource type="Resource" uid="uid://cl6rv1sapor4a" path="res://Resources/Armors/Magic_Armor.tres" id="5_1jkf6"]
+[ext_resource type="Script" path="res://Resources/Definitions/Entity/Entity_Resource.cs" id="4_dyyq0"]
 
 [resource]
-script = ExtResource("1_ki4ok")
-Hp = 7
-Armor = Array[Object]([ExtResource("4_ujysv"), ExtResource("5_1jkf6")])
+script = ExtResource("4_dyyq0")
+Hp = 5
+Armor = Array[Object]([ExtResource("4_07ja3")])
 Actions = Array[Object]([ExtResource("1_fqfo2"), ExtResource("1_fqfo2"), ExtResource("3_ibw02"), ExtResource("4_32tw8")])

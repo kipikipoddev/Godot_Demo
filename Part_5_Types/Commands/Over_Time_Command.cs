@@ -1,10 +1,10 @@
-using Components_Namespace;
+using System;
 using Core;
+using Interfaces;
 
 namespace Commands;
 
-public record Over_Time_Command(int Times, int Time_Between, Components Target, int Amount, string Name) : Command
+public record Over_Time_Command(IOver_Timer_Model Model, Command Command, Func<bool> Can_Run)
+    : Command
 {
-    public Timer_Component Timer { get; set; }
-    public int Runs { get; set; }
 }

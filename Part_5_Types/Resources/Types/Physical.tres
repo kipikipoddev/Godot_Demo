@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_qlw72")
 Parent = ExtResource("1_b31hd")
-Color = Color(0.764706, 0.764706, 0.764706, 1)
+Color = Color(0.898039, 0.756863, 0.00392157, 1)
