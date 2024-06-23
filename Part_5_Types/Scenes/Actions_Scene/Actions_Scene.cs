@@ -46,7 +46,7 @@ public partial class Actions_Scene : Base_Scene<IAction_Model[]>
         var sb = new StringBuilder(model.Name);
         if (model is IAmount_Model amount)
         {
-            sb.Append($" ({amount.Amount.Value}");
+            sb.Append($" ({amount.Amount}");
             if (model is IOver_Timer_Model over)
                 sb.Append($"x{over.Times}");
             sb.Append(')');

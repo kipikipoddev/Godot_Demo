@@ -1,3 +1,4 @@
+using System;
 using Commands;
 using Core;
 
@@ -16,8 +17,7 @@ public class Shield_Controller
         if (cmd.Model.Is_Positive | shield.Value == 0)
             return;
 
-        var orignal_amount = cmd.Model.Amount.Value;
-        cmd.Model.Amount.Value -= shield.Value;
-        shield.Value -= orignal_amount;
+        cmd.Reduction = Math.Min(shield.Value, cmd.Model.Amount);
+        shield.Value -= cmd.Reduction;
     }
 }

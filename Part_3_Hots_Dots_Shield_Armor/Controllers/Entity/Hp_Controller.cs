@@ -1,4 +1,3 @@
-using System;
 using Commands;
 using Core;
 
@@ -13,8 +12,7 @@ public class Hp_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var amount = cmd.Model.Amount;
-        cmd.Target.Hp.Value += amount.Value * (cmd.Model.Is_Positive ? 1 : -1);
-        amount.Value = amount.Max;
+        cmd.Target.Hp.Value += cmd.Total * (cmd.Model.Is_Positive ? 1 : -1);
+        cmd.Reduction = 0;
     }
 }

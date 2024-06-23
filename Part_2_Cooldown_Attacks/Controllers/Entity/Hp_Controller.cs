@@ -13,6 +13,6 @@ public class Hp_Controller
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
         var amount = cmd.Model.Amount;
-        cmd.Target.Hp.Value += amount.Value * (cmd.Model.Is_Positive ? 1 : -1);
+        cmd.Target.Hp.Value += amount * (cmd.Model.Is_Positive ? 1 : -1);
     }
 }

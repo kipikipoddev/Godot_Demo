@@ -13,8 +13,7 @@ public class Armor_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var value = cmd.Model.Amount.Value;
-        if (value > 0 & !cmd.Model.Is_Positive)
-            cmd.Model.Amount.Value = Math.Max(1, value - cmd.Target.Armor);
+        if (cmd.Total > 0 & !cmd.Model.Is_Positive)
+            cmd.Reduction = Math.Min(cmd.Model.Amount - 1, cmd.Reduction + cmd.Target.Armor);
     }
 }

@@ -15,9 +15,8 @@ public class Armor_Controller
 
     private static void Hp_Change_Handler(Hp_Change_Command cmd)
     {
-        var value = cmd.Model.Amount.Value;
-        if (value > 0 & !cmd.Model.Is_Positive)
-            cmd.Model.Amount.Value = Math.Max(1, value - Get_Reduction(cmd));
+        if (cmd.Total > 0 & !cmd.Model.Is_Positive)
+            cmd.Reduction = Math.Min(cmd.Model.Amount - 1, cmd.Reduction + Get_Reduction(cmd));
     }
 
     private static int Get_Reduction(Hp_Change_Command cmd)

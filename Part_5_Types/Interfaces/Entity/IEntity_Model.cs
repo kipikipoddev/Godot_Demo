@@ -6,7 +6,7 @@ public interface IEntity_Model : IName_Model
 {
     IValue_Model Hp { get; }
     Group_Resource Group { get; set; }
-    IArmor_Model[] Armor { get; }
+    IAmount_Model[] Armor { get; }
     IValue_Model Shield { get; }
     IAction_Model[] Actions { get; }
 

@@ -8,11 +8,11 @@ public class Entity_Model : Name_Model, IEntity_Model
 {
     public IValue_Model Hp { get; }
     public Group_Resource Group { get; set; }
-    public IArmor_Model[] Armor { get; }
+    public IAmount_Model[] Armor { get; }
     public IValue_Model Shield { get; }
     public IAction_Model[] Actions { get; }
 
-    public Entity_Model(Entity_Resource resource, Group_Resource group, IAction_Model[] actions, IArmor_Model[] armor)
+    public Entity_Model(Entity_Resource resource, Group_Resource group, IAction_Model[] actions, IAmount_Model[] armor)
         : base(resource)
     {
         Hp = new Value_Model(resource.Hp);
