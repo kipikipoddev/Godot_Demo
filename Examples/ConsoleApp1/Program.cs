@@ -1,3 +1,0 @@
-﻿
-
-System.Console.WriteLine("hi");
