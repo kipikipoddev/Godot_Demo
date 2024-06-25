@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Attack_Resource" load_steps=3 format=3 uid="uid://buaa025vuqvge"]
+
+[ext_resource type="Resource" uid="uid://dem2dcjey5jyk" path="res://Resources/Types/Fire_Magic.tres" id="1_q118w"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Attack_Resource.cs" id="1_wtq6j"]
+
+[resource]
+script = ExtResource("1_wtq6j")
+Damage = 8
+Cooldown = 4
+Cast = 3
+Type = ExtResource("1_q118w")

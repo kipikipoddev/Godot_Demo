@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Shield_Resource" load_steps=3 format=3 uid="uid://b8s2iy2ujuiig"]
+
+[ext_resource type="Resource" uid="uid://cp0id1tbpvh5y" path="res://Resources/Types/Magical.tres" id="1_b8v8m"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Shield_Resource.cs" id="1_w0uye"]
+
+[resource]
+script = ExtResource("1_w0uye")
+Amount = 3
+Cooldown = 5
+Type = ExtResource("1_b8v8m")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Rise_Resource" load_steps=3 format=3 uid="uid://xfpb62dmrga4"]
+
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Rise_Resource.cs" id="1_pfidk"]
+[ext_resource type="Resource" uid="uid://dr4xb1yj13jjl" path="res://Resources/Types/Dark_Magic.tres" id="1_uo4dt"]
+
+[resource]
+script = ExtResource("1_pfidk")
+Cooldown = 5
+Cast = 5
+Type = ExtResource("1_uo4dt")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Stasis_Resource" load_steps=3 format=3 uid="uid://cyqrxjik8qwhj"]
+
+[ext_resource type="Resource" uid="uid://cp0id1tbpvh5y" path="res://Resources/Types/Magical.tres" id="1_tskj3"]
+[ext_resource type="Script" path="res://Resources/Definitions/Actions/Stasis_Resource.cs" id="1_xg6f8"]
+
+[resource]
+script = ExtResource("1_xg6f8")
+Time = 3
+Cooldown = 5
+Cast = 4
+Type = ExtResource("1_tskj3")

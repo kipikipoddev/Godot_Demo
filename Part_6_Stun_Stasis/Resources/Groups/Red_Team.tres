@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Group_Resource" load_steps=2 format=3 uid="uid://sgrbcms5vtsv"]
+
+[ext_resource type="Script" path="res://Resources/Definitions/General/Group_Resource.cs" id="1_pgncf"]
+
+[resource]
+script = ExtResource("1_pgncf")
+Color = Color(0.815686, 0, 0.305882, 1)
